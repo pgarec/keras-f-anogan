@@ -157,6 +157,5 @@ if __name__ == '__main__':
     dcgan = DCGAN()
     trainer = Trainer(dcgan)
     trainer.train()
-    trainer.discriminator.save("disc.h5")
-    trainer.generator.save("gen.h5")
-    trainer.adversarial.save('wgan.h5')
+    trainer.discriminator.save('disc.h5')
+    trainer.generator.save('gen.h5')
