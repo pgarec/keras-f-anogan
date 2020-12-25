@@ -70,7 +70,7 @@ class Trainer:
 
     def regen_batch(self, batch):
 
-        output_encoder = keras.Model(inputs=self.encoder.input,outputs=self.encoder.output)
+        output_encoder = keras.Model(inputs=self.encoder.input, outputs=self.encoder.output)
         batch_out = output_encoder(batch)
         gen_output = self.generator.predict_on_batch(batch_out)
         return gen_output
@@ -104,6 +104,7 @@ class Trainer:
                 enc_loss = self.encoder.train_on_batch(regen_batch, gen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
+            print(stats)
         self.plot_dict(stats)
 
 
