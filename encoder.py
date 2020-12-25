@@ -3,8 +3,10 @@ from keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateSchedule
 from keras.models import Sequential
 from keras.metrics import mean_squared_error
 from keras.optimizers import Adam
+import keras
 from keras.initializers import RandomNormal
 import keras.backend as K
+from keras.models import load_model
 import numpy as np
 
 
@@ -15,6 +17,7 @@ class Encoder:
 
         assert image_shape[0] % 8 == 0, "Image shape must be divisible by 8."
 
+        self.adversarial = load_model('wgan.h5')
         self.image_shape = image_shape
         self.n_filters = n_filters
         self.z_size = z_size
@@ -49,6 +52,7 @@ class Encoder:
             model.add(BatchNormalization())
 
         model.add(Conv2D(filters=2*self.n_filters,
+                    name="feature_extractor",
                     kernel_size=(4, 4),
                     strides=2,
                     padding='same',
@@ -69,4 +73,10 @@ class Encoder:
         model.add(Flatten())
         model.add(Dense(1, use_bias=False))
 
-        print("eh")
+    def encoder_loss(self, y_true, y_pred):
+
+        l1 = mean_squared_error(y_true, y_pred)
+        intermediate_layer_model = keras.Model(inputs=self.adversarial.discriminator.input,
+                                               outputs=self.adversarial.discriminator.get_layer("feature_extractor").output)
+        l2 = mean_squared_error(intermediate_layer_model(y_true), intermediate_layer_model(y_pred))
+        return l1+l2

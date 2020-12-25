@@ -7,6 +7,7 @@ from keras.datasets import mnist
 from keras.optimizers import Adam, RMSprop
 plt.switch_backend('agg')
 
+
 class Trainer:
     def __init__(self, dcgan, optimizer='adam', plot_path='plots'):
         assert optimizer.lower() in ['adam', 'rmsprop'], "Optimizer unrecognized or unavailable."
