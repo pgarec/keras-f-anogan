@@ -6,6 +6,7 @@ from encoder import Encoder
 from keras.datasets import mnist
 from keras.models import load_model
 from keras.optimizers import Adam, RMSprop
+import keras
 plt.switch_backend('agg')
 
 
@@ -42,9 +43,8 @@ class Trainer:
         if not os.path.isdir(plot_path):
             os.mkdir(plot_path)
 
-        self.adversarial = load_model('wgan.h5')
-        self.discriminator = self.adversarial.discriminator
-        self.generator = self.adversarial.generator
+        self.discriminator = load_model('disc.h5')
+        self.generator = load_model('gen.h5')
         self.encoder = encoder
         self.z_size = encoder.z_size
         self.lr = encoder.lr
@@ -58,7 +58,6 @@ class Trainer:
         elif optimizer.lower() == 'rmsprop':
             opt = RMSprop(lr=self.lr)
 
-        self.adversarial.trainable = False
         self.generator.trainable = False
         self.discriminator.trainable = False
 
@@ -69,44 +68,45 @@ class Trainer:
         gen_output = self.generator.predict_on_batch(latent_vector_batch)
         return gen_output
 
+    def regen_batch(self, batch):
+
+        output_encoder = keras.Model(inputs=self.encoder.input,outputs=self.encoder.output)
+        batch_out = output_encoder(batch)
+        gen_output = self.generator.predict_on_batch(batch_out)
+        return gen_output
+
     def make_noise(self, batch_size):
         noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + self.z_size))
         return noise
+
+    def plot_dict(self, dictionary):
+        for key, item in dictionary.items():
+            plt.close()
+            plt.plot(range(len(item)), item)
+            plt.title(str(key))
+            plt.savefig(os.path.join(self.plot_path, '{}.png'.format(key)), bbox_inches='tight')
 
     def train(self, num_epochs=25, batch_size=32):
         batches_per_epoch = np.shape(self.x_train)[0] // batch_size
         stats = {'encoder_loss': []}
 
-        gen_iterations = 0
-
         for epoch in range(num_epochs):
             print('Epoch: {}. Training {}% complete.'.format(
                 epoch, np.around(100 * epoch / num_epochs, decimals=1)))
 
-            if (epoch + 1) % 5 == 0:
-                self.make_images(epoch + 1, num_images=3)
+            #if (epoch + 1) % 5 == 0:
+            #   self.make_images(epoch + 1, num_images=3)
 
             for i in range(batches_per_epoch):
 
-                # Train with a batch of generator (fake) data.
                 gen_batch = self.gen_batch(batch_size)
-                disc_loss_fake = self.discriminator.train_on_batch(gen_batch, -np.ones(batch_size))
-
-                # Train generator.
-
-                noise = self.make_noise(batch_size)
-
-                self.discriminator.trainable = False
-                gen_loss = self.adversarial.train_on_batch(noise, np.ones(batch_size))
-                self.discriminator.trainable = True
-
-                stats['generator_loss'].append(gen_loss)
-                stats['wasserstein_distance'].append(-(disc_loss_real + disc_loss_fake))
-
-                gen_iterations += 1
+                regen_batch = self.regen_batch(gen_batch)
+                enc_loss = self.encoder.train_on_batch(regen_batch, gen_batch)
+                stats['encoder_loss'].append(enc_loss)
 
         self.plot_dict(stats)
 
 
 if __name__ == '__main__':
-    trainer = Trainer(Encoder)
+    encoder = Encoder()
+    trainer = Trainer(encoder)

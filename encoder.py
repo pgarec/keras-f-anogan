@@ -17,7 +17,8 @@ class Encoder:
 
         assert image_shape[0] % 8 == 0, "Image shape must be divisible by 8."
 
-        self.adversarial = load_model('wgan.h5')
+        self.discriminator = load_model('disc.h5')
+        self.generator = load_model('gen.h5')
         self.image_shape = image_shape
         self.n_filters = n_filters
         self.z_size = z_size
@@ -76,7 +77,7 @@ class Encoder:
     def encoder_loss(self, y_true, y_pred):
 
         l1 = mean_squared_error(y_true, y_pred)
-        intermediate_layer_model = keras.Model(inputs=self.adversarial.discriminator.input,
-                                               outputs=self.adversarial.discriminator.get_layer("feature_extractor").output)
+        intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
+                                               outputs=self.discriminator.get_layer("feature_extractor").output)
         l2 = mean_squared_error(intermediate_layer_model(y_true), intermediate_layer_model(y_pred))
         return l1+l2
