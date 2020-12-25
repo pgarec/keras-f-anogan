@@ -68,3 +68,5 @@ class Encoder:
 
         model.add(Flatten())
         model.add(Dense(1, use_bias=False))
+
+        print("eh")
