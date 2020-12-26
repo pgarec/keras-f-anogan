@@ -9,6 +9,9 @@ import keras.backend as K
 from keras.models import load_model
 import numpy as np
 
+def wasserstein_loss(self, y_true, y_pred):
+    return -K.mean(y_true * y_pred)
+
 
 class Encoder:
     def __init__(self, image_shape=(32, 32, 1), n_filters=64, z_size=(1, 1, 100),
@@ -17,8 +20,8 @@ class Encoder:
 
         assert image_shape[0] % 8 == 0, "Image shape must be divisible by 8."
 
-        #self.discriminator = load_model('disc.h5')
-        self.generator = load_model('gen.h5')
+        self.discriminator = load_model('disc.h5', custom_objects={'wassertein_loss': wasserstein_loss})
+        self.generator = load_model('gen.h5', custom_objects={'wassertein_loss': wasserstein_loss})
         self.image_shape = image_shape
         self.n_filters = n_filters
         self.z_size = z_size

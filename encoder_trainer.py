@@ -7,8 +7,13 @@ from dcgan import DCGAN
 from keras.datasets import mnist
 from keras.models import load_model
 from keras.optimizers import Adam, RMSprop
+import keras.backend as K
 import keras
 plt.switch_backend('agg')
+
+
+def wasserstein_loss(self, y_true, y_pred):
+    return -K.mean(y_true * y_pred)
 
 
 def dataset():
@@ -44,8 +49,8 @@ class Trainer:
         if not os.path.isdir(plot_path):
             os.mkdir(plot_path)
 
-        self.generator = load_model('gen.h5')
-        #self.discriminator = load_model('disc.h5')
+        self.generator = load_model('gen.h5',  custom_objects={'wassertein_loss': wasserstein_loss})
+        self.discriminator = load_model('disc.h5', custom_objects={'wassertein_loss': wasserstein_loss})
 
         self.encoder = encoder
         self.z_size = encoder.z_size
