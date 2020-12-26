@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from encoder import Encoder
+from dcgan import DCGAN
 from keras.datasets import mnist
 from keras.models import load_model
 from keras.optimizers import Adam, RMSprop
@@ -45,6 +46,8 @@ class Trainer:
 
         self.discriminator = load_model('disc.h5')
         self.generator = load_model('gen.h5')
+        self.adversarial = dcgan.adversarial(self.generator, self.discriminator)
+
         self.encoder = encoder
         self.z_size = encoder.z_size
         self.lr = encoder.lr
@@ -104,7 +107,7 @@ class Trainer:
                 enc_loss = self.encoder.train_on_batch(regen_batch, gen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
-            print(stats)
+        print(stats)
         self.plot_dict(stats)
 
 
