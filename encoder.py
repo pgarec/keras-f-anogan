@@ -10,7 +10,7 @@ from keras.models import load_model
 import numpy as np
 
 
-def wasserstein_loss(self, y_true, y_pred):
+def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
 
 
