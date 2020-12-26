@@ -49,8 +49,8 @@ class Trainer:
         if not os.path.isdir(plot_path):
             os.mkdir(plot_path)
 
-        self.generator = load_model('gen.h5',  custom_objects={'wasserstein_loss': wasserstein_loss()})
-        self.discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss()})
+        self.generator = load_model('gen.h5',  custom_objects={'wasserstein_loss': wasserstein_loss})
+        self.discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 
         self.encoder = encoder
         self.z_size = encoder.z_size
