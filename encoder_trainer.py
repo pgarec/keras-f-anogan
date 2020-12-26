@@ -74,8 +74,8 @@ class Trainer:
     def regen_batch(self, batch):
 
         output_encoder = keras.Model(inputs=self.encod.input, outputs=self.encod.output)
-        print(output_encoder.summary())
-        batch_out = output_encoder(batch)
+        disc_output = self.encod.predict_on_batch(batch)
+        batch_out = output_encoder(disc_output)
         gen_output = self.generator.predict_on_batch(batch_out)
         return gen_output
 
