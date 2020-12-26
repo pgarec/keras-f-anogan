@@ -75,8 +75,7 @@ class Trainer:
 
         output_encoder = keras.Model(inputs=self.encod.input, outputs=self.encod.output)
         disc_output = self.encod.predict_on_batch(batch)
-        batch_out = output_encoder(disc_output)
-        gen_output = self.generator.predict_on_batch(batch_out)
+        gen_output = self.generator.predict_on_batch(disc_output)
         return gen_output
 
     def make_noise(self, batch_size):
