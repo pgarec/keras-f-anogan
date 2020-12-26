@@ -52,7 +52,7 @@ class Trainer:
         self.generator = load_model('gen.h5',  custom_objects={'wasserstein_loss': wasserstein_loss})
         self.discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 
-        self.encod = encod
+        self.encod = encod.encoder()
         self.z_size = encod.z_size
         self.lr = encod.lr
         self.x_train, self.x_test = dataset()
