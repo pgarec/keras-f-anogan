@@ -18,10 +18,6 @@ def wasserstein_loss(y_true, y_pred):
 
 def dataset():
 
-    """
-    Load dataset, convert to 32x32, constrain input to [-1, 1].
-    """
-
     (x_train, _), (x_test, _) = mnist.load_data()
 
     x_train = np.reshape(x_train, (-1, 28, 28, 1))
@@ -73,12 +69,12 @@ class Trainer:
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
         gen_output = self.generator.predict_on_batch(latent_vector_batch)
-        print(gen_output)
         return gen_output
 
     def regen_batch(self, batch):
 
         output_encoder = keras.Model(inputs=self.encod.input, outputs=self.encod.output)
+        print(output_encoder.summary())
         batch_out = output_encoder(batch)
         gen_output = self.generator.predict_on_batch(batch_out)
         return gen_output
@@ -101,9 +97,6 @@ class Trainer:
         for epoch in range(num_epochs):
             print('Epoch: {}. Training {}% complete.'.format(
                 epoch, np.around(100 * epoch / num_epochs, decimals=1)))
-
-            #if (epoch + 1) % 5 == 0:
-            #   self.make_images(epoch + 1, num_images=3)
 
             for i in range(batches_per_epoch):
 
