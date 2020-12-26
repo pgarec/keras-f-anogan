@@ -45,7 +45,7 @@ class Trainer:
             os.mkdir(plot_path)
 
         self.generator = load_model('gen.h5')
-        self.discriminator = load_model('disc.h5')
+        #self.discriminator = load_model('disc.h5')
 
         self.encoder = encoder
         self.z_size = encoder.z_size
