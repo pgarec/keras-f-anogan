@@ -52,7 +52,7 @@ class Trainer:
         self.generator = load_model('gen.h5',  custom_objects={'wasserstein_loss': wasserstein_loss})
         self.discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 
-        self.encoder = encod
+        self.encod = encod
         self.z_size = encod.z_size
         self.lr = encod.lr
         self.x_train, self.x_test = dataset()
@@ -68,7 +68,7 @@ class Trainer:
         self.generator.trainable = False
         self.discriminator.trainable = False
 
-        self.encoder.compile(optimizer=opt, loss=self.encoder.encoder_loss)
+        self.encod.compile(optimizer=opt, loss=self.encod.encoder_loss)
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
@@ -77,7 +77,7 @@ class Trainer:
 
     def regen_batch(self, batch):
 
-        output_encoder = keras.Model(inputs=self.encoder.input, outputs=self.encoder.output)
+        output_encoder = keras.Model(inputs=self.encod.input, outputs=self.encod.output)
         batch_out = output_encoder(batch)
         gen_output = self.generator.predict_on_batch(batch_out)
         return gen_output
@@ -108,7 +108,7 @@ class Trainer:
 
                 gen_batch = self.gen_batch(batch_size)
                 regen_batch = self.regen_batch(gen_batch)
-                enc_loss = self.encoder.train_on_batch(regen_batch, gen_batch)
+                enc_loss = self.encod.train_on_batch(regen_batch, gen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
         print(stats)
@@ -118,3 +118,4 @@ class Trainer:
 if __name__ == '__main__':
     encod = Encoder()
     trainer = Trainer(encod)
+    trainer.train()
