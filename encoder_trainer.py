@@ -116,5 +116,5 @@ class Trainer:
 
 
 if __name__ == '__main__':
-    encoder = Encoder()
-    trainer = Trainer(encoder)
+    encod = Encoder()
+    trainer = Trainer(encod)
