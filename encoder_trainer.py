@@ -75,6 +75,7 @@ class Trainer:
 
         output_encoder = keras.Model(inputs=self.encod.input, outputs=self.encod.output)
         disc_output = self.encod.predict_on_batch(batch)
+        print(disc_output)
         gen_output = self.generator.predict_on_batch(disc_output)
         return gen_output
 
