@@ -17,7 +17,7 @@ class Encoder:
 
         assert image_shape[0] % 8 == 0, "Image shape must be divisible by 8."
 
-        self.discriminator = load_model('disc.h5')
+        #self.discriminator = load_model('disc.h5')
         self.generator = load_model('gen.h5')
         self.image_shape = image_shape
         self.n_filters = n_filters
