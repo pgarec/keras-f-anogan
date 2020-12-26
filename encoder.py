@@ -1,4 +1,4 @@
-from keras.layers import Conv2D, Conv2DTranspose, Flatten, Dense, LeakyReLU, BatchNormalization
+from keras.layers import Conv2D, Conv2DTranspose, Flatten, Dense, LeakyReLU, BatchNormalization, Reshape
 from keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateScheduler
 from keras.models import Sequential
 from keras.metrics import mean_squared_error
@@ -77,6 +77,7 @@ class Encoder:
 
         model.add(Flatten())
         model.add(Dense(1, use_bias=False))
+        model.add(Reshape(1,1,100))
 
         return model
 
