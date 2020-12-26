@@ -44,9 +44,8 @@ class Trainer:
         if not os.path.isdir(plot_path):
             os.mkdir(plot_path)
 
-        self.discriminator = load_model('disc.h5')
         self.generator = load_model('gen.h5')
-        self.adversarial = dcgan.adversarial(self.generator, self.discriminator)
+        self.discriminator = load_model('disc.h5')
 
         self.encoder = encoder
         self.z_size = encoder.z_size
