@@ -43,7 +43,7 @@ def dataset():
 
 class Trainer:
 
-    def __init__(self, encoder, optimizer='adam', plot_path='plots'):
+    def __init__(self, encod, optimizer='adam', plot_path='plots'):
         assert optimizer.lower() in ['adam', 'rmsprop'], "Optimizer unrecognized or unavailable."
 
         if not os.path.isdir(plot_path):
@@ -52,9 +52,9 @@ class Trainer:
         self.generator = load_model('gen.h5',  custom_objects={'wasserstein_loss': wasserstein_loss})
         self.discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 
-        self.encoder = encoder
-        self.z_size = encoder.z_size
-        self.lr = encoder.lr
+        self.encoder = encod
+        self.z_size = encod.z_size
+        self.lr = encod.lr
         self.x_train, self.x_test = dataset()
         self.model_compiler(optimizer)
         self.plot_path = plot_path

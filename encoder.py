@@ -78,6 +78,8 @@ class Encoder:
         model.add(Flatten())
         model.add(Dense(1, use_bias=False))
 
+        return model
+
     def encoder_loss(self, y_true, y_pred):
 
         l1 = mean_squared_error(y_true, y_pred)
