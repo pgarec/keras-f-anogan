@@ -73,6 +73,7 @@ class Trainer:
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
         gen_output = self.generator.predict_on_batch(latent_vector_batch)
+        print(gen_output)
         return gen_output
 
     def regen_batch(self, batch):
