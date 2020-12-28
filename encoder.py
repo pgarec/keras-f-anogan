@@ -75,7 +75,8 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
-        #model.add(Flatten())
+        model.add(Flatten())
+        model.summary()
         #model.add(Dense(1, use_bias=False))
         model.add(Reshape((1,1,100)))
 
