@@ -76,7 +76,7 @@ class Encoder:
         model.add(BatchNormalization())
 
         model.add(Flatten())
-        model.add(Dense(1, use_bias=False))
+        #model.add(Dense(1, use_bias=False))
         model.add(Reshape((1,1,100)))
 
         return model
