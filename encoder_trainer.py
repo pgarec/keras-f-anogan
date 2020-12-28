@@ -81,11 +81,7 @@ class Trainer:
 
     def regen_batch(self, batch):
 
-        print(batch)
-        print("---------------------------------------------")
         enc_output = self.encod.predict_on_batch(batch)
-        print(enc_output)
-        print("---------------------------------------------")
         gen_output = self.generator.predict_on_batch(enc_output)
         return gen_output
 
@@ -113,6 +109,7 @@ class Trainer:
                 data_batch = self.get_batch(batch_size)
                 regen_batch = self.regen_batch(data_batch)
                 enc_loss = self.encod.train_on_batch(regen_batch, data_batch)
+                print(enc_loss)
                 stats['encoder_loss'].append(enc_loss)
 
         print(stats)
