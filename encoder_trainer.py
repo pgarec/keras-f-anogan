@@ -71,14 +71,22 @@ class Trainer:
         gen_output = self.generator.predict_on_batch(latent_vector_batch)
         return gen_output
 
+    def get_batch(self, batch_size, train=True):
+        if train:
+            idx = np.random.choice(np.shape(self.x_train)[0], batch_size, replace=False)
+            return self.x_train[idx]
+        else:
+            idx = np.random.choice(np.shape(self.x_test)[0], batch_size, replace=False)
+            return self.x_test[idx]
+
     def regen_batch(self, batch):
 
         print(batch)
         print("---------------------------------------------")
-        disc_output = self.encod.predict_on_batch(batch)
-        print(disc_output)
+        enc_output = self.encod.predict_on_batch(batch)
+        print(enc_output)
         print("---------------------------------------------")
-        gen_output = self.generator.predict_on_batch(disc_output)
+        gen_output = self.generator.predict_on_batch(enc_output)
         return gen_output
 
     def make_noise(self, batch_size):
@@ -102,9 +110,9 @@ class Trainer:
 
             for i in range(batches_per_epoch):
 
-                gen_batch = self.gen_batch(batch_size)
-                regen_batch = self.regen_batch(gen_batch)
-                enc_loss = self.encod.train_on_batch(regen_batch, gen_batch)
+                data_batch = self.get_batch(batch_size)
+                regen_batch = self.regen_batch(data_batch)
+                enc_loss = self.encod.train_on_batch(regen_batch, data_batch)
                 stats['encoder_loss'].append(enc_loss)
 
         print(stats)
