@@ -86,5 +86,5 @@ class Encoder:
         l1 = mean_squared_error(y_true, y_pred)
         intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
                                                outputs=self.discriminator.get_layer("feature_extractor").output)
-        l2 = mean_squared_error(intermediate_layer_model(y_true), intermediate_layer_model(y_pred))
+        l2 = mean_squared_error(intermediate_layer_model.predict(y_true), intermediate_layer_model.predict(y_pred))
         return l1+l2
