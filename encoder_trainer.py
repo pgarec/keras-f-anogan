@@ -48,6 +48,7 @@ class Trainer:
         self.generator = load_model('gen.h5',  custom_objects={'wasserstein_loss': wasserstein_loss})
         self.discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 
+        self.encoder_class = encod
         self.encod = encod.encoder()
         self.z_size = encod.z_size
         self.lr = encod.lr
@@ -64,7 +65,7 @@ class Trainer:
         self.generator.trainable = False
         self.discriminator.trainable = False
 
-        self.encod.compile(optimizer=opt, loss=self.encod.encoder_loss)
+        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss)
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
