@@ -64,7 +64,7 @@ class Trainer:
         self.generator.trainable = False
         self.discriminator.trainable = False
 
-        self.encod.compile(optimizer=opt, loss=wasserstein_loss)
+        self.encod.compile(optimizer=opt, loss=self.encod.encoder_loss)
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
@@ -109,7 +109,6 @@ class Trainer:
                 data_batch = self.get_batch(batch_size)
                 regen_batch = self.regen_batch(data_batch)
                 enc_loss = self.encod.train_on_batch(regen_batch, data_batch)
-                print(enc_loss)
                 stats['encoder_loss'].append(enc_loss)
 
         print(stats)
