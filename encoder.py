@@ -94,7 +94,6 @@ class Encoder:
             print(y_true)
             print("Predicted")
             print(y_pred)
-            x = intermediate_layer_model(y_true)
-            #l2 = K.mean(K.square(intermediate_layer_model(y_pred) - intermediate_layer_model(y_true)))
+            l2 = K.mean(K.square(intermediate_layer_model(self.generator.predict(y_pred)) - intermediate_layer_model(y_true)))
             return l1
         return loss
