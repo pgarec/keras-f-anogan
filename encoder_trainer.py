@@ -81,12 +81,9 @@ class Trainer:
             return self.x_test[idx]
 
     def regen_batch(self, batch):
-        print("dins de regen")
-        print(batch)
+
         enc_output = self.encod.predict_on_batch(batch)
-        print(enc_output)
         gen_output = self.generator.predict_on_batch(enc_output)
-        print(gen_output)
         return gen_output
 
     def make_noise(self, batch_size):
