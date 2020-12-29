@@ -62,14 +62,14 @@ class Trainer:
         self.generator.trainable = False
         self.discriminator.trainable = False
 
-        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
+        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
         gen_output = self.generator.predict_on_batch(latent_vector_batch)
         return gen_output
 
-    def get_batch(self, batch_size, train=True):
+    def get_batch(self, batch_size, train):
         if train:
             idx = np.random.choice(np.shape(self.x_train)[0], batch_size, replace=False)
             return self.x_train[idx]
@@ -104,7 +104,7 @@ class Trainer:
 
             for i in range(batches_per_epoch):
 
-                data_batch = self.get_batch(batch_size)
+                data_batch = self.get_batch(batch_size, True)
                 regen_batch = self.regen_batch(data_batch)
                 enc_loss = self.encod.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
@@ -112,8 +112,17 @@ class Trainer:
         print(stats)
         self.plot_dict(stats)
 
+    def test(self):
+
+        x_test = self.get_batch(batch_size=32,False)
+        y_test = self.regen_batch(x_test)
+        score = self.encod.evaluate(x_test, y_test, verbose=0)
+        print('Test loss:', score[0])
+        print('Test accuracy:', score[1])
+
 
 if __name__ == '__main__':
     encod = Encoder()
     trainer = Trainer(encod)
     trainer.train()
+    trainer.test()
