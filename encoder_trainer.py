@@ -80,8 +80,8 @@ class Trainer:
     def regen_batch(self, batch):
 
         enc_output = self.encod.predict_on_batch(batch)
-        #gen_output = self.generator.predict_on_batch(enc_output)
-        return enc_output
+        gen_output = self.generator.predict_on_batch(enc_output)
+        return gen_output
 
     def make_noise(self, batch_size):
         noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + self.z_size))
