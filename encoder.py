@@ -22,9 +22,7 @@ class Encoder:
         assert image_shape[0] % 8 == 0, "Image shape must be divisible by 8."
 
         self.discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
-        self.discriminator.trainable = False
         self.generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
-        self.generator.trainable = False
         self.image_shape = image_shape
         self.n_filters = n_filters
         self.z_size = z_size
@@ -85,6 +83,9 @@ class Encoder:
 
     def encoder_loss(self, y_true, y_pred):
 
+        print(y_pred)
+        print("------")
+        print(y_true)
         l1 = mean_squared_error(y_true, y_pred)
         print(self.discriminator.summary())
         intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
