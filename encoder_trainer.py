@@ -1,14 +1,11 @@
 import os
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
 from encoder import Encoder
-from dcgan import DCGAN
 from keras.datasets import mnist
 from keras.models import load_model
 from keras.optimizers import Adam, RMSprop
 import keras.backend as K
-import keras
 plt.switch_backend('agg')
 
 
@@ -83,8 +80,8 @@ class Trainer:
     def regen_batch(self, batch):
 
         enc_output = self.encod.predict_on_batch(batch)
-        gen_output = self.generator.predict_on_batch(enc_output)
-        return gen_output
+        #gen_output = self.generator.predict_on_batch(enc_output)
+        return enc_output
 
     def make_noise(self, batch_size):
         noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + self.z_size))

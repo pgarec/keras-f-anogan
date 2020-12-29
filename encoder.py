@@ -1,13 +1,9 @@
 from keras.layers import Conv2D, Conv2DTranspose, Flatten, Dense, LeakyReLU, BatchNormalization, Reshape
-from keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateScheduler
 from keras.models import Sequential
-from keras.metrics import mean_squared_error
-from keras.optimizers import Adam
 import keras
 from keras.initializers import RandomNormal
 import keras.backend as K
 from keras.models import load_model
-import numpy as np
 
 
 def wasserstein_loss(y_true, y_pred):
