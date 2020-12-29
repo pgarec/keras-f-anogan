@@ -114,7 +114,7 @@ class Trainer:
 
     def test(self):
 
-        x_test = self.get_batch(batch_size=32,False)
+        x_test = self.get_batch(32,False)
         y_test = self.regen_batch(x_test)
         score = self.encod.evaluate(x_test, y_test, verbose=0)
         print('Test loss:', score[0])
