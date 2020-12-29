@@ -91,3 +91,4 @@ class Encoder:
             #return -K.mean(y_true * y_pred)
 
             return l1+l2
+        return loss
