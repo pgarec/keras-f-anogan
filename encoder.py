@@ -88,8 +88,10 @@ class Encoder:
 
         def loss(y_true, y_pred):
             l1 = K.mean(K.square(y_pred - y_true))
-            print(y_pred)
+            print("True")
             print(y_true)
+            print("Predicted")
+            print(y_pred)
             x = intermediate_layer_model(y_pred)
             #l2 = K.mean(K.square(intermediate_layer_model(y_pred) - intermediate_layer_model(y_true)))
             return l1
