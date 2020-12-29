@@ -84,9 +84,6 @@ class Encoder:
     def encoder_loss(self):
         intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
                                                outputs=self.discriminator.get_layer("feature_extractor").output)
-        print(intermediate_layer_model.summary())
-        print("---")
-        print(self.generator.summary())
 
         def loss(y_true, y_pred):
             l1 = K.mean(K.square(y_pred - y_true))
