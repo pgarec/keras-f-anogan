@@ -89,4 +89,4 @@ class Encoder:
         #l2 = mean_squared_error(intermediate_layer_model.predict(y_true), intermediate_layer_model.predict(y_pred))
         #return -K.mean(y_true * y_pred)
 
-        return K.sum(l1,l1)
+        return l1
