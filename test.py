@@ -22,7 +22,7 @@ def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
 
 
-def dataset(self):
+def dataset():
 
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
