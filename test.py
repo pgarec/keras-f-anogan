@@ -66,15 +66,12 @@ if __name__ == '__main__':
     im = get_batch(1)
     im2 = generator.predict(encoder.predict(im))
 
-    plt.show()
     plt.imshow(im2.squeeze(), cmap='gray')
-    plt.savefig('image.png')
+    plt.savefig('image_reconstructed.png')
 
-    '''plt.savefig()
-    im2_res = im2.reshape([im2.shape[-1]//2,-1])
-    img2 = Image.fromarray(im2_res, 'RGB')
-    im.save("image_real.jpg")
-    img2.save("image_regen.jpg")'''
+    plt.imshow(im2.squeeze(), cmap='gray')
+    plt.savefig('image_real.png')
+
 
 
 
