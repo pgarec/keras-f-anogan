@@ -24,7 +24,7 @@ def wasserstein_loss(y_true, y_pred):
 
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
-encoder = load_model('encoder.h5', custom_objects={'encoder_loss': encoder_loss})
+encoder = load_model('encoder.h5', custom_objects={'loss': encoder_loss})
 
 
 def dataset():
