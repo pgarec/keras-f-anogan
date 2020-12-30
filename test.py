@@ -69,7 +69,7 @@ if __name__ == '__main__':
     plt.imshow(im2.squeeze(), cmap='gray')
     plt.savefig('resultats_encoding/image_reconstructed.png')
 
-    plt.imshow(im, cmap='gray')
+    plt.imshow(im.squeeze(), cmap='gray')
     plt.savefig('resultats_encoding/image_real.png')
 
 
