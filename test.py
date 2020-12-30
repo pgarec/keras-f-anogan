@@ -6,13 +6,13 @@ import numpy as np
 from PIL import Image
 
 
-def encoder_loss(self):
-    intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
-                                           outputs=self.discriminator.get_layer("feature_extractor").output)
+def encoder_loss():
+    intermediate_layer_model = keras.Model(inputs=discriminator.input,
+                                           outputs=discriminator.get_layer("feature_extractor").output)
 
     def loss(y_true, y_pred):
         l1 = K.mean(K.square(y_pred - y_true))
-        l2 = K.mean(K.square(intermediate_layer_model(self.generator(y_pred)) - intermediate_layer_model(y_true)))
+        l2 = K.mean(K.square(intermediate_layer_model(generator(y_pred)) - intermediate_layer_model(y_true)))
         return l1 + l2
 
     return loss
@@ -20,6 +20,11 @@ def encoder_loss(self):
 
 def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
+
+
+discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
+generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
+encoder = load_model('encoder.h5', custom_objects={'encoder_loss': encoder_loss})
 
 
 def dataset():
@@ -57,8 +62,6 @@ def get_batch(batch_size):
 
 if __name__ == '__main__':
 
-    encoder = load_model('encoder.h5', custom_objects={'encoder_loss': encoder_loss})
-    generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
     im = get_batch(1)
     im2 = generator.predict(encoder.predict(im))
     im.save("image_real.jpg")
