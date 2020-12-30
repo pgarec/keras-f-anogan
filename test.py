@@ -64,6 +64,10 @@ if __name__ == '__main__':
 
     im = get_batch(1)
     im2 = generator.predict(encoder.predict(im))
+    print(generator.summary())
+    print(im)
+    print("---")
+    print(im2)
     img = Image.fromarray(im, 'RGB')
     img2 = Image.fromarray(im2, 'RGB')
     img.save("image_real.jpg")
