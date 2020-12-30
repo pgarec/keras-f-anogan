@@ -64,8 +64,10 @@ if __name__ == '__main__':
 
     im = get_batch(1)
     im2 = generator.predict(encoder.predict(im))
-    im.save("image_real.jpg")
-    im2.save("image_regen.jpg")
+    img = Image.fromarray(im, 'RGB')
+    img2 = Image.fromarray(im2, 'RGB')
+    img.save("image_real.jpg")
+    img2.save("image_regen.jpg")
 
 
 
