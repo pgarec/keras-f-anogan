@@ -66,7 +66,7 @@ if __name__ == '__main__':
     im2 = generator.predict(encoder.predict(im))
     im2_res = im2.reshape([im2.shape[-1]//2,-1])
     img2 = Image.fromarray(im2_res, 'RGB')
-    img.save("image_real.jpg")
+    im.save("image_real.jpg")
     img2.save("image_regen.jpg")
 
 
