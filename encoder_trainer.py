@@ -66,8 +66,6 @@ class Trainer:
         self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
         #self.encod.compile(optimizer=opt, loss="mse")
 
-        print(self.encod.trainable)
-
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
         gen_output = self.generator.predict_on_batch(latent_vector_batch)
@@ -110,10 +108,7 @@ class Trainer:
             for i in range(batches_per_epoch):
 
                 data_batch = self.get_batch(batch_size, True)
-                print(data_batch.shape)
                 regen_batch = self.regen_batch(data_batch)
-                print(regen_batch.shape)
-                print(self.encod.summary())
                 enc_loss = self.encod.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
