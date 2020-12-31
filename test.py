@@ -69,8 +69,8 @@ def make_noise(batch_size):
 if __name__ == '__main__':
 
     im = get_batch(1)
-    #im2 = generator.predict(encoder.predict(im))
-    im2 = generator.predict(make_noise(1))
+    im2 = generator.predict(encoder.predict(im))
+    #im2 = generator.predict(make_noise(1))
 
     plt.imshow(im2.squeeze(), cmap='gray')
     plt.savefig('resultats_encoding/image_reconstructed.png')
