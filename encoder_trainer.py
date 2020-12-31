@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 from encoder import Encoder
 from keras.datasets import mnist
 from keras.models import load_model
+import tensorflow.keras.optimizers
 from keras.optimizers import Adam, RMSprop
 import keras.backend as K
 plt.switch_backend('agg')
@@ -62,7 +63,9 @@ class Trainer:
         self.generator.trainable = False
         self.discriminator.trainable = False
 
-        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
+        #self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
+        self.encod.compile(optimizer=opt, loss="mse", metrics=[self.encoder_class.encoder_loss()])
+
         print(self.encod.trainable)
 
     def gen_batch(self, batch_size):
