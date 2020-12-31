@@ -63,6 +63,7 @@ class Trainer:
         self.discriminator.trainable = False
 
         self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
+        print(self.encod.trainable)
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
@@ -109,7 +110,6 @@ class Trainer:
                 enc_loss = self.encod.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
-        print(stats)
         self.plot_dict(stats)
 
     def test(self):
