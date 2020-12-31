@@ -71,7 +71,7 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
-        #model.add(Flatten())
+        model.add(Flatten())
         model.add(Dense(100, use_bias=False))
         model.add(Reshape((1,1,100)))
 
@@ -82,7 +82,8 @@ class Encoder:
                                                outputs=self.discriminator.get_layer("feature_extractor").output)
 
         def loss(y_true, y_pred):
-            l1 = K.mean(K.square(self.generator(y_pred) - y_true))
+            #l1 = K.mean(K.square(self.generator(y_pred) - y_true))
+            l1 = K.mean(K.square(y_pred - y_true))
             l2 = K.mean(K.square(intermediate_layer_model(self.generator(y_pred)) - intermediate_layer_model(y_true)))
             return l1+l2
         return loss
