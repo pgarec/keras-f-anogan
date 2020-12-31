@@ -63,8 +63,8 @@ class Trainer:
         self.generator.trainable = False
         self.discriminator.trainable = False
 
-        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
-        #self.encod.compile(optimizer=opt, loss="mse")
+        #self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
+        self.encod.compile(optimizer=opt, loss="mse")
 
         print(self.encod.trainable)
 
