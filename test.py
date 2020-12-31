@@ -22,7 +22,7 @@ def encoder_loss():
 def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
 
-
+z_size=(1, 1, 100)
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 encoder = load_model('encoder.h5', custom_objects={'loss': encoder_loss()})
@@ -61,10 +61,16 @@ def get_batch(batch_size):
     return x_te[idx]
 
 
+def make_noise(batch_size):
+    noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + z_size))
+    return noise
+
+
 if __name__ == '__main__':
 
     im = get_batch(1)
-    im2 = generator.predict(encoder.predict(im))
+    #im2 = generator.predict(encoder.predict(im))
+    im2 = generator.predict(make_noise(1))
 
     plt.imshow(im2.squeeze(), cmap='gray')
     plt.savefig('resultats_encoding/image_reconstructed.png')
