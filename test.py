@@ -73,10 +73,10 @@ if __name__ == '__main__':
         im2 = generator.predict(encoder.predict(im))
 
         plt.imshow(im2.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_reconstructed.png')
+        plt.savefig('resultats_encoding/image_reconstructed'+i+'.png')
 
         plt.imshow(im.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_real.png')
+        plt.savefig('resultats_encoding/image_real'+i+'.png')
 
 
 
