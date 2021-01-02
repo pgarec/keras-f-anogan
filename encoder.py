@@ -249,6 +249,7 @@ class Encoder:
 
         model = models.Model(inputs=[image_tensor], outputs=[network_output])
         print(model.summary())
+        return model
 
     def encoder_gen(self, encoder, generator):
         model = Sequential()
