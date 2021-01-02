@@ -17,7 +17,7 @@ def custom_activation(x):
 
 
 class Encoder:
-    def __init__(self, image_shape=(32, 32, 1), n_filters=8, z_size=(1, 1, 100),
+    def __init__(self, image_shape=(32, 32, 1), n_filters=64, z_size=(1, 1, 100),
                  alpha=0.2, lr=5e-5, extra_layers=0, clamp_lower=-0.01,
                  clamp_upper=0.01, disc_iters_per_gen_iters=5):
 
@@ -38,8 +38,8 @@ class Encoder:
 
     def encoder(self):
         model = Sequential()
-        model.add(Conv2D(filters=16,
-                    kernel_size=(3, 3),
+        model.add(Conv2D(filters=self.n_filters,
+                    kernel_size=(4, 4),
                     strides=2,
                     padding='same',
                     use_bias=False,
@@ -48,8 +48,8 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
-        model.add(Conv2D(filters=8,
-                    kernel_size=(3, 3),
+        model.add(Conv2D(filters=2*self.n_filters,
+                    kernel_size=(4, 4),
                     strides=2,
                     padding='same',
                     use_bias=False,
@@ -57,8 +57,8 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
-        model.add(Conv2D(filters=8,
-                    kernel_size=(3, 3),
+        model.add(Conv2D(filters=4*self.n_filters,
+                    kernel_size=(4, 4),
                     strides=2,
                     padding='same',
                     use_bias=False,
