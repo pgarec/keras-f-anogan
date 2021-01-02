@@ -7,9 +7,9 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 
-def encoder_loss(self):
-    intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
-                                           outputs=self.discriminator.get_layer("feature_extractor").output)
+def encoder_loss():
+    intermediate_layer_model = keras.Model(inputs=discriminator.input,
+                                           outputs=discriminator.get_layer("feature_extractor").output)
 
     def loss(y_true, y_pred):
         l1 = K.mean(K.square(y_pred - y_true))
