@@ -19,6 +19,10 @@ def encoder_loss():
     return loss
 
 
+def custom_activation(x):
+    return K.tanh(x)/2
+
+
 def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
 
