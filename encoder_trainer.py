@@ -83,8 +83,8 @@ class Trainer:
     def regen_batch(self, batch):
 
         enc_output = self.encod.predict_on_batch(batch)
-        gen_output = self.generator.predict_on_batch(enc_output)
-        return gen_output
+        #gen_output = self.generator.predict_on_batch(enc_output)
+        return enc_output
 
     def make_noise(self, batch_size):
         noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + self.z_size))
@@ -113,7 +113,6 @@ class Trainer:
                 print("shape train")
                 print(data_batch.shape)
                 print(regen_batch.shape)
-                #enc_loss = self.encoder_gen.train_on_batch(data_batch, regen_batch)
                 enc_loss = self.encod.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
