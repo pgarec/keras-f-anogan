@@ -33,7 +33,7 @@ class Encoder:
         self.weight_init = RandomNormal(mean=0., stddev=0.02)
 
     def encoder(self):
-        '''model = Sequential()
+        model = Sequential()
         model.add(Conv2D(filters=16,
                     kernel_size=(3, 3),
                     strides=2,
@@ -66,9 +66,9 @@ class Encoder:
         model.add(Dense(100, activation='sigmoid'))
         model.add(Reshape((1,1,100)))
 
-        return model'''
+        return model
 
-        input_img = keras.Input(shape=(32, 32, 1))
+        '''input_img = keras.Input(shape=(32, 32, 1))
 
         x = layers.Conv2D(16, (3, 3), activation='relu', padding='same')(input_img)
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
@@ -78,8 +78,7 @@ class Encoder:
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
         x = layers.Flatten()(x)
         x = layers.Dense(100, activation='sigmoid')(x)
-        x = layers.Reshape((1,1,100))(x)
-        return x
+        x = layers.Reshape((1,1,100))(x) '''
 
     def encoder_gen(self, encoder, generator):
         model = Sequential()
