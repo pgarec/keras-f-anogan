@@ -76,7 +76,8 @@ class Encoder:
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
         x = layers.Conv2D(8, (3, 3), activation='relu', padding='same')(x)
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
-        x = layers.Dense(100,activation='sigmoid')(x)
+        x = layers.Dense(100, activation='sigmoid')(x)
+        print(x.output_shape)
         x = layers.Reshape((1,1,100))(x)
         return x
 
