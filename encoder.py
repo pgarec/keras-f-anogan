@@ -79,6 +79,8 @@ class Encoder:
 
     def encoder_gen(self, encoder, generator):
         model = Sequential()
+        print(encoder.summary())
+        print(generator.summary())
         model.add(encoder)
         model.add(generator)
 
