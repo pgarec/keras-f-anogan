@@ -64,8 +64,8 @@ class Trainer:
 
         self.generator.trainable = False
         self.discriminator.trainable = False
-        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
-        #self.encoder_gen.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
+        #self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
+        self.encoder_gen.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
@@ -83,8 +83,8 @@ class Trainer:
     def regen_batch(self, batch):
 
         enc_output = self.encod.predict_on_batch(batch)
-        #gen_output = self.generator.predict_on_batch(enc_output)
-        return enc_output
+        gen_output = self.generator.predict_on_batch(enc_output)
+        return gen_output
 
     def make_noise(self, batch_size):
         noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + self.z_size))
@@ -110,7 +110,7 @@ class Trainer:
 
                 data_batch = self.get_batch(batch_size, True)
                 regen_batch = self.regen_batch(data_batch)
-                enc_loss = self.encod.train_on_batch(data_batch, regen_batch)
+                enc_loss = self.encoder_gen.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
         self.plot_dict(stats)
