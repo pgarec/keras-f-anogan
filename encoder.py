@@ -5,6 +5,7 @@ from keras.initializers import RandomNormal
 import keras.backend as K
 from keras import layers
 from keras.models import load_model
+from keras.activations import sigmoid
 
 
 def wasserstein_loss(y_true, y_pred):
@@ -62,9 +63,7 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
         model.add(Flatten())
-        print("EO")
-        print(model.output_shape)
-        model.add(Dense(100, use_bias=False))
+        model.add(Dense(100, activation='sigmoid'))
         model.add(Reshape((1,1,100)))
 
         return model

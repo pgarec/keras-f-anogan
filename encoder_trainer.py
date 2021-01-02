@@ -98,14 +98,12 @@ class Trainer:
 
     def train(self, num_epochs=25, batch_size=32):
         batches_per_epoch = np.shape(self.x_train)[0] // batch_size
-        print(np.shape(self.x_train)[0])
         stats = {'encoder_loss': []}
 
         for epoch in range(num_epochs):
             print('Epoch: {}. Training {}% complete.'.format(
                 epoch, np.around(100 * epoch / num_epochs, decimals=1)))
 
-            print(self.generator.trainable)
             for i in range(batches_per_epoch):
 
                 data_batch = self.get_batch(batch_size, True)
