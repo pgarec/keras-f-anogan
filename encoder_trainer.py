@@ -53,6 +53,7 @@ class Trainer:
         self.lr = encod.lr
         self.x_train, self.x_test = dataset()
         self.plot_path = plot_path
+        self.generator.trainable = False
         self.encoder_gen = encod.encoder_gen(self.encod, self.generator)
         self.model_compiler(optimizer)
 
@@ -117,7 +118,7 @@ class Trainer:
 
         x_test = self.get_batch(32,False)
         y_test = self.regen_batch(x_test)
-        score = self.encod.evaluate(x_test, y_test, verbose=0)
+        score = self.encoder_gen.evaluate(x_test, y_test, verbose=0)
         print('Test loss:', str(score[0]))
 
 
@@ -126,4 +127,4 @@ if __name__ == '__main__':
     trainer = Trainer(encod)
     trainer.train()
     trainer.test()
-    trainer.encod.save('encoder.h5')
+    trainer.encoder_gen.save('encodergen.h5')

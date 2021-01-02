@@ -7,14 +7,14 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 
-def encoder_loss():
-    intermediate_layer_model = keras.Model(inputs=discriminator.input,
-                                           outputs=discriminator.get_layer("feature_extractor").output)
+def encoder_loss(self):
+    intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
+                                           outputs=self.discriminator.get_layer("feature_extractor").output)
 
     def loss(y_true, y_pred):
-        l1 = K.mean(K.square(generator(y_pred) - y_true))
-        # l2 = K.mean(K.square(intermediate_layer_model(self.generator(y_pred)) - intermediate_layer_model(y_true)))
-        return l1
+        l1 = K.mean(K.square(y_pred - y_true))
+        l2 = K.mean(K.square(intermediate_layer_model(y_pred) - intermediate_layer_model(y_true)))
+        return l1 + l2
 
     return loss
 
@@ -26,7 +26,7 @@ z_size=(1, 1, 100)
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 encoder = load_model('encoder.h5', custom_objects={'loss': encoder_loss()})
-
+encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss()})
 
 def dataset():
 
@@ -71,12 +71,16 @@ if __name__ == '__main__':
     for i in range(10):
         im = get_batch(1)
         im2 = generator.predict(encoder.predict(im))
+        im3 = encodergen.predict(im)
 
         plt.imshow(im2.squeeze(), cmap='gray')
         plt.savefig('resultats_encoding/image_reconstructed'+str(i)+'.png')
 
         plt.imshow(im.squeeze(), cmap='gray')
         plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
+
+        plt.imshow(im3.squeeze(), cmap='gray')
+        plt.savefig('resultats_encoding/image_reconstructed2' + str(i) + '.png')
 
 
 
