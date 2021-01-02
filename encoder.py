@@ -12,6 +12,10 @@ def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
 
 
+def custom_activation(x):
+    return K.tanh(x)/2
+
+
 class Encoder:
     def __init__(self, image_shape=(32, 32, 1), n_filters=8, z_size=(1, 1, 100),
                  alpha=0.2, lr=5e-5, extra_layers=0, clamp_lower=-0.01,
@@ -62,7 +66,7 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
         model.add(Flatten())
-        model.add(Dense(100, activation='tanh'))
+        model.add(Dense(100, activation=custom_activation))
         model.add(Reshape((1,1,100)))
 
         return model
