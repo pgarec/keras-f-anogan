@@ -34,7 +34,7 @@ class Encoder:
 
     def encoder(self):
         '''model = Sequential()
-        model.add(Conv2D(filters=self.n_filters,
+        model.add(Conv2D(filters=16,
                     kernel_size=(3, 3),
                     strides=2,
                     padding='same',
@@ -44,7 +44,7 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
-        model.add(Conv2D(filters=2*self.n_filters,
+        model.add(Conv2D(filters=8,
                     name="feature_extractor",
                     kernel_size=(3, 3),
                     strides=2,
@@ -54,7 +54,7 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
-        model.add(Conv2D(filters=4*self.n_filters,
+        model.add(Conv2D(filters=8,
                     kernel_size=(3, 3),
                     strides=2,
                     padding='same',
@@ -76,6 +76,7 @@ class Encoder:
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
         x = layers.Conv2D(8, (3, 3), activation='relu', padding='same')(x)
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
+        x = layers.Flatten()(x)
         x = layers.Dense(100, activation='sigmoid')(x)
         x = layers.Reshape((1,1,100))(x)
         return x
