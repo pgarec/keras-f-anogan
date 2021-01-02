@@ -32,7 +32,7 @@ class Encoder:
         self.weight_init = RandomNormal(mean=0., stddev=0.02)
 
     def encoder(self):
-        model = Sequential()
+        '''model = Sequential()
         model.add(Conv2D(filters=self.n_filters,
                     kernel_size=(4, 4),
                     strides=2,
@@ -75,9 +75,17 @@ class Encoder:
         print("EO")
         print(model.output_shape)
         model.add(Dense(100, use_bias=False))
-        model.add(Reshape((1,1,100)))
+        model.add(Reshape((1,1,100)))'''
 
-        return model
+        x = layers.Conv2D(16, (3, 3), activation='relu', padding='same')(self.image_shape)
+        x = layers.MaxPooling2D((2, 2), padding='same')(x)
+        x = layers.Conv2D(8, (3, 3), activation='relu', padding='same')(x)
+        x = layers.MaxPooling2D((2, 2), padding='same')(x)
+        x = layers.Conv2D(8, (3, 3), activation='relu', padding='same')(x)
+        x = layers.MaxPooling2D((2, 2), padding='same')(x)
+        print(x.output_shape)
+
+        return x
 
     def encoder_gen(self, encoder, generator):
         model = Sequential()
