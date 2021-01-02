@@ -110,9 +110,6 @@ class Trainer:
 
                 data_batch = self.get_batch(batch_size, True)
                 regen_batch = self.regen_batch(data_batch)
-                print("shape train")
-                print(data_batch.shape)
-                print(regen_batch.shape)
                 enc_loss = self.encod.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
