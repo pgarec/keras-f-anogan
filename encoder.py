@@ -3,6 +3,7 @@ from keras.models import Sequential
 import keras
 from keras.initializers import RandomNormal
 import keras.backend as K
+from keras import layers
 from keras.models import load_model
 
 
@@ -62,17 +63,24 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
-        model.add(Conv2D(filters=4*self.n_filters,
+        '''model.add(Conv2D(filters=4*self.n_filters,
                     kernel_size=(4, 4),
                     strides=2,
                     padding='same',
                     use_bias=False,
                     kernel_initializer=self.weight_init))
         model.add(LeakyReLU(self.alpha))
+        model.add(BatchNormalization())'''
+        model.add(Conv2D(filters=100,
+                            kernel_size=(4, 4),
+                            strides=2,
+                            padding='same',
+                            use_bias=False,
+                            kernel_initializer=self.weight_init))
+        model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
-
         model.add(Flatten())
-        model.add(Dense(100, use_bias=False))
+        #model.add(Dense(100, use_bias=False))
         model.add(Reshape((1,1,100)))
 
         return model
