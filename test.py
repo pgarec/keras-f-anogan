@@ -25,7 +25,7 @@ def wasserstein_loss(y_true, y_pred):
 z_size=(1, 1, 100)
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
-encoder = load_model('encoder.h5', custom_objects={'loss': encoder_loss()})
+#encoder = load_model('encoder.h5', custom_objects={'loss': encoder_loss()})
 encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss()})
 
 def dataset():
@@ -70,11 +70,11 @@ if __name__ == '__main__':
 
     for i in range(10):
         im = get_batch(1)
-        im2 = generator.predict(encoder.predict(im))
+        #im2 = generator.predict(encoder.predict(im))
         im3 = encodergen.predict(im)
 
-        plt.imshow(im2.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_reconstructed'+str(i)+'.png')
+        #plt.imshow(im2.squeeze(), cmap='gray')
+        #plt.savefig('resultats_encoding/image_reconstructed'+str(i)+'.png')
 
         plt.imshow(im.squeeze(), cmap='gray')
         plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
