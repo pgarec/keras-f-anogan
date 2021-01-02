@@ -62,10 +62,10 @@ class Trainer:
         elif optimizer.lower() == 'rmsprop':
             opt = RMSprop(lr=self.lr)
 
-        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
         self.generator.trainable = False
-        self.encoder_gen.compile(optimizer=opt, loss=self.dcgan.wasserstein_loss)
-
+        self.discriminator.trainable = False
+        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
+        self.encoder_gen.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
