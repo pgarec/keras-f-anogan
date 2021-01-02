@@ -68,7 +68,9 @@ class Encoder:
 
         return model'''
 
-        x = layers.Conv2D(16, (3, 3), activation='relu', padding='same')(self.image_shape)
+        input_img = keras.Input(shape=(32, 32, 1))
+
+        x = layers.Conv2D(16, (3, 3), activation='relu', padding='same')(input_img)
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
         x = layers.Conv2D(8, (3, 3), activation='relu', padding='same')(x)
         x = layers.MaxPooling2D((2, 2), padding='same')(x)
