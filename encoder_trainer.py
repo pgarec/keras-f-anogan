@@ -54,6 +54,7 @@ class Trainer:
         self.x_train, self.x_test = dataset()
         self.model_compiler(optimizer)
         self.plot_path = plot_path
+        self.encoder_gen = encod.encoder_gen(self.encod, self.generator)
 
     def model_compiler(self, optimizer):
         if optimizer.lower() == 'adam':
@@ -61,12 +62,10 @@ class Trainer:
         elif optimizer.lower() == 'rmsprop':
             opt = RMSprop(lr=self.lr)
 
+        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
         self.generator.trainable = False
-        self.discriminator.trainable = False
+        self.encoder_gen.compile(optimizer=opt, loss=self.dcgan.wasserstein_loss)
 
-        #self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
-        self.encod.compile(optimizer=opt, loss='binary_crossentropy')
-        #self.encod.compile(optimizer=opt, loss="mse")
 
     def gen_batch(self, batch_size):
         latent_vector_batch = self.make_noise(batch_size)
@@ -111,7 +110,7 @@ class Trainer:
 
                 data_batch = self.get_batch(batch_size, True)
                 regen_batch = self.regen_batch(data_batch)
-                enc_loss = self.encod.train_on_batch(data_batch, regen_batch)
+                enc_loss = self.encoder_gen.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
         self.plot_dict(stats)

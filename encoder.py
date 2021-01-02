@@ -77,13 +77,19 @@ class Encoder:
 
         return model
 
+    def encoder_gen(self, generator, encoder):
+        model = Sequential()
+        model.add(encoder)
+        model.add(generator)
+
+        return model
+
     def encoder_loss(self):
         intermediate_layer_model = keras.Model(inputs=self.discriminator.input,
                                                outputs=self.discriminator.get_layer("feature_extractor").output)
 
         def loss(y_true, y_pred):
-            #l1 = K.mean(K.square(self.generator(y_pred) - y_true))
             l1 = K.mean(K.square(y_pred - y_true))
-            l2 = K.mean(K.square(intermediate_layer_model(self.generator(y_pred)) - intermediate_layer_model(y_true)))
+            l2 = K.mean(K.square(intermediate_layer_model(y_pred) - intermediate_layer_model(y_true)))
             return l1+l2
         return loss
