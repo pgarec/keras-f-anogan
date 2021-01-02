@@ -89,10 +89,12 @@ class Encoder:
                                                outputs=self.discriminator.get_layer("feature_extractor").output)
 
         def loss(y_true, y_pred):
-            print("shape loss")
-            print(y_true.shape)
-            print(y_pred.shape)
-            l1 = K.mean(K.square(y_pred - y_true))
-            l2 = K.mean(K.square(intermediate_layer_model(self.generator(y_pred)) - intermediate_layer_model(y_true)))
+            if y_pred.shape == (1,1,100):
+                l1 = K.mean(K.square(y_pred - y_true))
+                l2 = K.mean(K.square(intermediate_layer_model(self.generator(y_pred)) - intermediate_layer_model(y_true)))
+            else:
+                l1 = K.mean(K.square(y_pred - y_true))
+                l2 = K.mean(K.square(intermediate_layer_model(y_pred) - intermediate_layer_model(y_true)))
+
             return l1+l2
         return loss
