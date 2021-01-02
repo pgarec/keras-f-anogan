@@ -79,8 +79,6 @@ class Encoder:
 
     def encoder_gen(self, encoder, generator):
         model = Sequential()
-        print(encoder.summary())
-        print(generator.summary())
         model.add(encoder)
         model.add(generator)
 
@@ -91,6 +89,7 @@ class Encoder:
                                                outputs=self.discriminator.get_layer("feature_extractor").output)
 
         def loss(y_true, y_pred):
+            print("shape loss")
             print(y_true.shape)
             print(y_pred.shape)
             l1 = K.mean(K.square(y_pred - y_true))
