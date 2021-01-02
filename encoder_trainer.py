@@ -64,7 +64,6 @@ class Trainer:
 
         self.generator.trainable = False
         self.discriminator.trainable = False
-        #self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
         self.encoder_gen.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
 
     def gen_batch(self, batch_size):
@@ -81,7 +80,6 @@ class Trainer:
             return self.x_test[idx]
 
     def regen_batch(self, batch):
-
         enc_output = self.encod.predict_on_batch(batch)
         gen_output = self.generator.predict_on_batch(enc_output)
         return gen_output
@@ -120,7 +118,7 @@ class Trainer:
         x_test = self.get_batch(32,False)
         y_test = self.regen_batch(x_test)
         score = self.encod.evaluate(x_test, y_test, verbose=0)
-        print('Test loss:', score[0])
+        print('Test loss:', str(score[0]))
 
 
 if __name__ == '__main__':
