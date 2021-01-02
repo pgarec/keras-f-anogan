@@ -1,4 +1,5 @@
 import os
+import keras
 import numpy as np
 import matplotlib.pyplot as plt
 from encoder import Encoder
@@ -37,7 +38,7 @@ def dataset():
 
 class Trainer:
 
-    def __init__(self, encod, optimizer='adam', plot_path='plots'):
+    def __init__(self, encod, optimizer='rmsprop', plot_path='plots'):
         assert optimizer.lower() in ['adam', 'rmsprop'], "Optimizer unrecognized or unavailable."
 
         if not os.path.isdir(plot_path):
@@ -63,7 +64,8 @@ class Trainer:
         self.generator.trainable = False
         self.discriminator.trainable = False
 
-        self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
+        #self.encod.compile(optimizer=opt, loss=self.encoder_class.encoder_loss(), metrics=[self.encoder_class.encoder_loss()])
+        self.encod.compile(optimizer=opt, loss='binary_crossentropy')
         #self.encod.compile(optimizer=opt, loss="mse")
 
     def gen_batch(self, batch_size):
