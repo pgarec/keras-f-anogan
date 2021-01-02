@@ -30,7 +30,7 @@ z_size=(1, 1, 100)
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 #encoder = load_model('encoder.h5', custom_objects={'loss': encoder_loss()})
-encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss()})
+encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
 
 def dataset():
 
