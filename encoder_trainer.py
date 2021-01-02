@@ -118,7 +118,8 @@ class Trainer:
         x_test = self.get_batch(32,False)
         y_test = self.regen_batch(x_test)
         score = self.encoder_gen.evaluate(x_test, y_test, verbose=0)
-        print('Test loss:', str(score[0]))
+        print('Test loss:')
+        print(score)
 
 
 if __name__ == '__main__':
