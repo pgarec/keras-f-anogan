@@ -72,6 +72,7 @@ def make_noise(batch_size):
 if __name__ == '__main__':
 
     for i in range(100):
+        print(i)
         im = get_batch(1)
         im3 = encodergen.predict(im)
 
