@@ -62,7 +62,7 @@ class Encoder:
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
         model.add(Flatten())
-        model.add(Dense(100, activation='sigmoid'))
+        model.add(Dense(100, activation='tanh'))
         model.add(Reshape((1,1,100)))
 
         return model
