@@ -38,7 +38,7 @@ def dataset():
 
 class Trainer:
 
-    def __init__(self, encod, optimizer='adam', plot_path='plots'):
+    def __init__(self, encod, optimizer='rmsprop', plot_path='plots'):
         assert optimizer.lower() in ['adam', 'rmsprop'], "Optimizer unrecognized or unavailable."
 
         if not os.path.isdir(plot_path):
