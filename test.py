@@ -12,9 +12,9 @@ def encoder_loss():
                                            outputs=discriminator.get_layer("feature_extractor").output)
 
     def loss(y_true, y_pred):
-        l1 = K.mean(K.square(y_pred - y_true))
-        l2 = K.mean(K.square(intermediate_layer_model(generator(y_pred)) - intermediate_layer_model(y_true)))
-        return l1 + l2
+        l1 = K.mean(K.square(generator(y_pred) - y_true))
+        # l2 = K.mean(K.square(intermediate_layer_model(self.generator(y_pred)) - intermediate_layer_model(y_true)))
+        return l1
 
     return loss
 
