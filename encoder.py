@@ -68,18 +68,6 @@ class Encoder:
 
         return model
 
-        '''input_img = keras.Input(shape=(32, 32, 1))
-
-        x = layers.Conv2D(16, (3, 3), activation='relu', padding='same')(input_img)
-        x = layers.MaxPooling2D((2, 2), padding='same')(x)
-        x = layers.Conv2D(8, (3, 3), activation='relu', padding='same')(x)
-        x = layers.MaxPooling2D((2, 2), padding='same')(x)
-        x = layers.Conv2D(8, (3, 3), activation='relu', padding='same')(x)
-        x = layers.MaxPooling2D((2, 2), padding='same')(x)
-        x = layers.Flatten()(x)
-        x = layers.Dense(100, activation='sigmoid')(x)
-        x = layers.Reshape((1,1,100))(x) '''
-
     def encoder_gen(self, encoder, generator):
         model = Sequential()
         model.add(encoder)
@@ -94,5 +82,5 @@ class Encoder:
         def loss(y_true, y_pred):
             l1 = K.mean(K.square(y_pred - y_true))
             l2 = K.mean(K.square(intermediate_layer_model(y_pred) - intermediate_layer_model(y_true)))
-            return l1+l2
+            return l1
         return loss
