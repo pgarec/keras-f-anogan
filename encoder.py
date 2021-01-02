@@ -77,7 +77,7 @@ class Encoder:
 
         return model
 
-    def encoder_gen(self, generator, encoder):
+    def encoder_gen(self, encoder, generator):
         model = Sequential()
         model.add(encoder)
         model.add(generator)
