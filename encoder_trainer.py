@@ -52,9 +52,9 @@ class Trainer:
         self.z_size = encod.z_size
         self.lr = encod.lr
         self.x_train, self.x_test = dataset()
-        self.model_compiler(optimizer)
         self.plot_path = plot_path
         self.encoder_gen = encod.encoder_gen(self.encod, self.generator)
+        self.model_compiler(optimizer)
 
     def model_compiler(self, optimizer):
         if optimizer.lower() == 'adam':
