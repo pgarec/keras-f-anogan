@@ -1,11 +1,9 @@
 import os
-import keras
 import numpy as np
 import matplotlib.pyplot as plt
 from encoder import Encoder
 from keras.datasets import mnist
 from keras.models import load_model
-import tensorflow.keras.optimizers
 from keras.optimizers import Adam, RMSprop
 import keras.backend as K
 plt.switch_backend('agg')

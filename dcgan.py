@@ -48,7 +48,6 @@ class DCGAN:
             model.add(BatchNormalization())
 
         model.add(Conv2D(filters=2*self.n_filters,
-                    name="feature_extractor",
                     kernel_size=(4, 4),
                     strides=2,
                     padding='same',

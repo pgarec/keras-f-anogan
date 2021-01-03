@@ -1,3 +1,4 @@
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,7 +7,6 @@ from dcgan import DCGAN
 from keras.datasets import mnist
 from keras.optimizers import Adam, RMSprop
 plt.switch_backend('agg')
-
 
 class Trainer:
     def __init__(self, dcgan, optimizer='adam', plot_path='plots'):
@@ -86,7 +86,7 @@ class Trainer:
             plt.title(str(key))
             plt.savefig(os.path.join(self.plot_path, '{}.png'.format(key)), bbox_inches='tight')
 
-    def make_images(self, epoch, num_images=3):
+    def make_images(self, epoch, num_images=10):
         noise = self.make_noise(num_images)
         digits = self.generator.predict(noise).reshape(-1, 32, 32)
 
@@ -157,5 +157,5 @@ if __name__ == '__main__':
     dcgan = DCGAN()
     trainer = Trainer(dcgan)
     trainer.train()
-    trainer.discriminator.save('disc.h5')
     trainer.generator.save('gen.h5')
+    trainer.discriminator.save('disc.h5')
