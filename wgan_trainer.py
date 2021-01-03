@@ -159,4 +159,3 @@ if __name__ == '__main__':
     trainer.train()
     trainer.discriminator.save('disc.h5')
     trainer.generator.save('gen.h5')
-    trainer.adversarial.save('adv.h5')
