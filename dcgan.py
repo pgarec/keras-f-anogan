@@ -49,6 +49,7 @@ class DCGAN:
 
         model.add(Conv2D(filters=2*self.n_filters,
                     kernel_size=(4, 4),
+                    name="feature_extractor",
                     strides=2,
                     padding='same',
                     use_bias=False,

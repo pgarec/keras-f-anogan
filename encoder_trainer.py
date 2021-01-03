@@ -104,6 +104,7 @@ class Trainer:
             for i in range(batches_per_epoch):
                 data_batch = self.get_batch(batch_size, True)
                 regen_batch = self.regen_batch(data_batch)
+                self.generator.trainable = False
                 enc_loss = self.encoder_gen.train_on_batch(data_batch, regen_batch)
                 stats['encoder_loss'].append(enc_loss)
 
