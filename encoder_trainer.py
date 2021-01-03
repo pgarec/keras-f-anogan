@@ -64,7 +64,6 @@ class Trainer:
             opt = RMSprop(lr=self.lr)
 
         self.generator.trainable = False
-        self.discriminator.trainable = False
         self.encoder_gen.compile(optimizer=opt, loss=self.encoder_class.encoder_loss())
 
     def gen_batch(self, batch_size):
@@ -103,9 +102,9 @@ class Trainer:
         for epoch in range(num_epochs):
             print('Epoch: {}. Training {}% complete.'.format(
                 epoch, np.around(100 * epoch / num_epochs, decimals=1)))
+            print(self.generator.trainabe)
 
             for i in range(batches_per_epoch):
-
                 data_batch = self.get_batch(batch_size, True)
                 regen_batch = self.regen_batch(data_batch)
                 enc_loss = self.encoder_gen.train_on_batch(data_batch, regen_batch)
