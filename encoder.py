@@ -3,11 +3,7 @@ from keras.models import Sequential
 import keras
 from keras.initializers import RandomNormal
 import keras.backend as K
-from keras import layers
 from keras.models import load_model
-from keras import models
-from keras.activations import sigmoid
-
 
 
 def wasserstein_loss(y_true, y_pred):
