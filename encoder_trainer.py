@@ -102,7 +102,7 @@ class Trainer:
         for epoch in range(num_epochs):
             print('Epoch: {}. Training {}% complete.'.format(
                 epoch, np.around(100 * epoch / num_epochs, decimals=1)))
-            print(self.generator.trainabe)
+            print(self.generator.trainable)
 
             for i in range(batches_per_epoch):
                 data_batch = self.get_batch(batch_size, True)
