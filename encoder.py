@@ -1,4 +1,4 @@
-from keras.layers import Conv2D, Conv2DTranspose, Flatten, Dense, LeakyReLU, BatchNormalization, Reshape
+from keras.layers import Conv2D, Conv2DTranspose, Flatten, Dense, LeakyReLU, BatchNormalization, Reshape, Input
 from keras.models import Sequential
 import keras
 from keras.initializers import RandomNormal
@@ -31,7 +31,7 @@ class Encoder:
 
     def encoder(self):
         model = Sequential()
-        model.add(Conv2D(filters=self.n_filters,
+        '''model.add(Conv2D(filters=self.n_filters,
                     kernel_size=(4, 4),
                     strides=2,
                     padding='same',
@@ -60,6 +60,12 @@ class Encoder:
         model.add(BatchNormalization())
         model.add(Flatten())
         model.add(Dense(100, activation=custom_activation))
+        model.add(Reshape((1,1,100)))'''
+        model.add(Input(shape=self.image_shape))
+        model.add(Dense(1024, inplace=True, activation=LeakyReLU(0.2)))
+        model.add(Dense(512, inplace=True, activation=LeakyReLU(0.2)))
+        model.add(Dense(256, inplace=True, activation=LeakyReLU(0.2)))
+        model.add(Dense(100, inplace=True, activation=custom_activation))
         model.add(Reshape((1,1,100)))
 
         return model
