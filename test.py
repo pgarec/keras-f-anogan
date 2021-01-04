@@ -71,15 +71,11 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
-    for i in range(20):
+    for i in range(15):
         print(i)
         n = make_noise(1)
         im = get_batch(1)
-        im2 = generator.predict(n)
         im3 = encodergen.predict(im)
-
-        plt.imshow(im2.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/random_generated' + str(i) + '.png')
 
         plt.imshow(im.squeeze(), cmap='gray')
         plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
