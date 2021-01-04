@@ -61,10 +61,10 @@ class Encoder:
         model.add(Flatten())
         model.add(Dense(100, activation=custom_activation))
         model.add(Reshape((1,1,100)))'''
-        model.add(Dense(1024, inplace=True, activation=LeakyReLU))
-        model.add(Dense(512, inplace=True, activation=LeakyReLU))
-        model.add(Dense(256, inplace=True, activation=LeakyReLU))
-        model.add(Dense(100, inplace=True, activation=custom_activation))
+        model.add(Dense(1024, activation=LeakyReLU))
+        model.add(Dense(512, activation=LeakyReLU))
+        model.add(Dense(256, activation=LeakyReLU))
+        model.add(Dense(100, activation=custom_activation))
         model.add(Reshape((1,1,100)))
 
         return model
