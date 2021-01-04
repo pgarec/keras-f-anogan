@@ -80,7 +80,6 @@ class DCGAN:
                     padding='same',
                     activation='relu',
                     use_bias=False,
-                    input_shape=self.z_size,
                     kernel_initializer=self.weight_init))
         model.add(BatchNormalization())
 
