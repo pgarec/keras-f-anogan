@@ -61,6 +61,7 @@ class Encoder:
         model.add(Flatten())
         model.add(Dense(100, activation=custom_activation))
         model.add(Reshape((1,1,100)))'''
+        model.add(Input(shape=self.image_shape))
         model.add(Dense(1024, activation=LeakyReLU))
         model.add(Dense(512, activation=LeakyReLU))
         model.add(Dense(256, activation=LeakyReLU))
