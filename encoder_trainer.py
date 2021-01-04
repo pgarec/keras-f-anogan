@@ -124,5 +124,6 @@ if __name__ == '__main__':
     encod = Encoder()
     trainer = Trainer(encod)
     trainer.train()
+    trainer.encod.save('encoder.h5')
     trainer.encoder_gen.save('encodergen.h5')
     trainer.test()

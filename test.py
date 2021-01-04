@@ -71,6 +71,10 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
+    n = make_noise(5)
+    im = get_batch(n)
+
+
     for i in range(15):
         print(i)
         n = make_noise(1)
