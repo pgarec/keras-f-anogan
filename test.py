@@ -72,10 +72,12 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
-    n = make_noise(5)
-    im = get_batch(n)
+    #n = make_noise(5)
+    im = get_batch(5)
+    enc = encoder.predict_on_batch(im)
+    print(enc)
 
-
+'''
     for i in range(15):
         print(i)
         n = make_noise(1)
@@ -86,7 +88,7 @@ if __name__ == '__main__':
         plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
 
         plt.imshow(im3.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_reconstructed' + str(i) + '.png')
+        plt.savefig('resultats_encoding/image_reconstructed' + str(i) + '.png')'''
 
 
 
