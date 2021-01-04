@@ -67,6 +67,7 @@ class DCGAN:
         model.add(BatchNormalization())
 
         model.add(Flatten())
+        print(model.summary())
         model.add(Dense(1, use_bias=False))
 
         return model
