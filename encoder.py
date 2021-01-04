@@ -31,7 +31,7 @@ class Encoder:
 
     def encoder(self):
         model = Sequential()
-        '''model.add(Conv2D(filters=self.n_filters,
+        model.add(Conv2D(filters=self.n_filters,
                     kernel_size=(4, 4),
                     strides=2,
                     padding='same',
@@ -60,13 +60,13 @@ class Encoder:
         model.add(BatchNormalization())
         model.add(Flatten())
         model.add(Dense(100, activation=custom_activation))
-        model.add(Reshape((1,1,100)))'''
-        model.add(Dense(1024, activation='relu', input_shape=(32,32,1)))
+        model.add(Reshape((1,100)))
+        '''model.add(Dense(1024, activation='relu', input_shape=(32,32,1)))
         model.add(Dense(512, input_shape=(1024,), activation='relu'))
         model.add(Dense(256, activation='relu', input_shape=(512,)))
         model.add(Flatten())
         model.add(Dense(100, activation=custom_activation, input_shape=(256,)))
-        model.add(Reshape((1,1,100)))
+        model.add(Reshape((1,100)))'''
 
         return model
 
