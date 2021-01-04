@@ -65,6 +65,7 @@ class Encoder:
         model.add(Dense(512, input_shape=(1024,), activation='relu'))
         model.add(Dense(256, activation='relu', input_shape=(512,)))
         model.add(Dense(100, activation=custom_activation, input_shape=(256,)))
+        print(model.summary())
         model.add(Reshape((1,1,100)))
 
         return model
