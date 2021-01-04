@@ -93,7 +93,7 @@ class Trainer:
             plt.title(str(key))
             plt.savefig(os.path.join(self.plot_path, '{}.png'.format(key)), bbox_inches='tight')
 
-    def train(self, num_epochs=35, batch_size=1):
+    def train(self, num_epochs=35, batch_size=64):
         batches_per_epoch = np.shape(self.x_train)[0] // batch_size
         print(batches_per_epoch)
         stats = {'encoder_loss': []}
