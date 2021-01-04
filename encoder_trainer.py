@@ -95,6 +95,7 @@ class Trainer:
 
     def train(self, num_epochs=2, batch_size=1):
         batches_per_epoch = np.shape(self.x_train)[0] // batch_size
+        print(batches_per_epoch)
         stats = {'encoder_loss': []}
 
         for epoch in range(num_epochs):
