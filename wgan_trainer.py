@@ -71,7 +71,7 @@ class Trainer:
             return self.x_test[idx]
 
     def make_noise(self, batch_size):
-        noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + tuple([self.z_size])))
+        noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + self.z_size))
         return noise
 
     def gen_batch(self, batch_size):
