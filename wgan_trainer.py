@@ -45,7 +45,7 @@ class Trainer:
         """
 
         (x_train, y_train), (x_test, y_test) = mnist.load_data()
-
+        print(x_train.shape)
         train_filter = np.where((y_train == 0))
         test_filter = np.where((y_test == 0))
         (x_train, y_train) = x_train[train_filter], y_train[train_filter]
