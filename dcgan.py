@@ -8,7 +8,7 @@ import keras.backend as K
 import numpy as np
 
 class DCGAN:
-    def __init__(self, image_shape=(32, 32, 1), n_filters=64, z_size=(100),
+    def __init__(self, image_shape=(32, 32, 1), n_filters=64, z_size=(1, 1, 100),
                  alpha=0.2, lr=5e-5, extra_layers=0, clamp_lower=-0.01,
                  clamp_upper=0.01, disc_iters_per_gen_iters=5):
 
@@ -79,7 +79,6 @@ class DCGAN:
                     strides=1,
                     padding='same',
                     activation='relu',
-                    input_shape=self.z_size,
                     use_bias=False,
                     kernel_initializer=self.weight_init))
         model.add(BatchNormalization())
