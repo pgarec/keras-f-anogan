@@ -15,7 +15,11 @@ def wasserstein_loss(y_true, y_pred):
 
 def dataset():
 
-    (x_train, _), (x_test, _) = mnist.load_data()
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 0))
+    test_filter = np.where((y_test == 0))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
 
     x_train = np.reshape(x_train, (-1, 28, 28, 1))
     train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
