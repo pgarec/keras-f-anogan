@@ -76,14 +76,14 @@ if __name__ == '__main__':
     for i in range(15):
         print(i)
         n = make_noise(1)
-        im = get_batch(1)
-        im3 = encodergen.predict(im)
+        #im = get_batch(1)
+        im3 = generator.predict(n)
 
-        plt.imshow(im.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
+        #plt.imshow(im.squeeze(), cmap='gray')
+        #plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
 
         plt.imshow(im3.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_reconstructed' + str(i) + '.png')
+        plt.savefig('resultats_encoding/generated' + str(i) + '.png')
 
 
 
