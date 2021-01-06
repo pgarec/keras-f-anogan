@@ -49,7 +49,7 @@ class Trainer:
         print(x_test.shape)
         train_filter = np.where((y_train == 0))
         test_filter = np.where((y_test == 0))
-        #(x_train, y_train) = x_train[train_filter], y_train[train_filter]
+        (x_train, y_train) = x_train[train_filter], y_train[train_filter]
         print(x_train.shape)
         (x_test, y_test) = y_test[test_filter], y_test[test_filter]
         print(x_test.shape)
