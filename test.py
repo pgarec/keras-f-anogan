@@ -78,18 +78,18 @@ if __name__ == '__main__':
     for i in range(15):
         print(i)
         n = make_noise(1)
-        im = get_batch(1)
-        im2 = encodergen.predict(im)
-        im3 = generator.predict(n)
+        #im = get_batch(1)
+        #im2 = encodergen.predict(im)
+        im3 = gen_gp.predict(n)
 
-        plt.imshow(im.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
+        #plt.imshow(im.squeeze(), cmap='gray')
+        #plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
 
-        plt.imshow(im2.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_reconstruced' + str(i) + '.png')
+        #plt.imshow(im2.squeeze(), cmap='gray')
+        #plt.savefig('resultats_encoding/image_reconstruced' + str(i) + '.png')
 
         plt.imshow(im3.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/generated' + str(i) + '.png')
+        plt.savefig('proves-wgangp/generated' + str(i) + '.png')
 
 
 
