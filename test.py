@@ -42,9 +42,12 @@ def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
 
 z_size=(1, 1, 100)
+z_size2=(1, 1, 100)
+
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 #disc_gp = load_model('disc-gp.h5')
-gen_gp = load_model('gen-gp.h5', custom_objects={'RandomWeightedAverage':RandomWeightedAverage,'wasserstein_loss': wasserstein_loss2})
+gen_gp = load_model('gen-gp.h5', custom_objects={'RandomWeightedAverage':RandomWeightedAverage,
+                                                 'wasserstein_loss': wasserstein_loss2})
 encoder = load_model('encoder.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
@@ -83,7 +86,7 @@ def get_batch(batch_size):
 
 
 def make_noise(batch_size):
-    noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + z_size))
+    noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + tuple([z_size2])))
     return noise
 
 
