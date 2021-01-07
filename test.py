@@ -15,9 +15,8 @@ class RandomWeightedAverage(_Merge):
     think of. Improvements appreciated."""
 
     def _merge_function(self, inputs):
-        weights = K.random_uniform((BATCH_SIZE, 1, 1, 1))
-        return (weights * inputs[0]) + ((1 - weights) * inputs[1])
-
+        alpha = K.random_uniform((32, 1, 1, 1))
+        return (alpha * inputs[0]) + ((1 - alpha) * inputs[1])
 
 
 def encoder_loss():
