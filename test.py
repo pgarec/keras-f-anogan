@@ -42,7 +42,7 @@ def wasserstein_loss(y_true, y_pred):
     return -K.mean(y_true * y_pred)
 
 z_size=(1, 1, 100)
-z_size2=(1, 1, 100)
+z_size2=100
 
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 #disc_gp = load_model('disc-gp.h5')
