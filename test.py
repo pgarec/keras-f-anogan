@@ -106,7 +106,7 @@ if __name__ == '__main__':
         #plt.imshow(im2.squeeze(), cmap='gray')
         #plt.savefig('resultats_encoding/image_reconstruced' + str(i) + '.png')
 
-        plt.imshow(im3.squeeze(), cmap='gray')
+        plt.imshow(im3, cmap='gray')
         plt.savefig('proves-wgangp/generated' + str(i) + '.png')
 
 
