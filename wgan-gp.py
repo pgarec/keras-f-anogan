@@ -243,4 +243,4 @@ if __name__ == '__main__':
     wgan = WGANGP()
     wgan.train(epochs=30000, batch_size=32, sample_interval=100)
     wgan.generator_model.save('gen-gp.h5')
-    wgan.discriminator_model.save('disc-gp.h5')
+    wgan.critic_model.save('disc-gp.h5')
