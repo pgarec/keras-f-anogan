@@ -5,6 +5,19 @@ from keras.datasets import mnist
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
+from keras.layers.merge import _Merge
+
+
+class RandomWeightedAverage(_Merge):
+    """Takes a randomly-weighted average of two tensors. In geometric terms, this
+    outputs a random point on the line between each pair of input points.
+    Inheriting from _Merge is a little messy but it was the quickest solution I could
+    think of. Improvements appreciated."""
+
+    def _merge_function(self, inputs):
+        weights = K.random_uniform((BATCH_SIZE, 1, 1, 1))
+        return (weights * inputs[0]) + ((1 - weights) * inputs[1])
+
 
 
 def encoder_loss():
@@ -28,8 +41,8 @@ def wasserstein_loss(y_true, y_pred):
 
 z_size=(1, 1, 100)
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
-disc_gp = load_model('disc-gp.h5')
-gen_gp = load_model('gen-gp.h5')
+#disc_gp = load_model('disc-gp.h5')
+gen_gp = load_model('gen-gp.h5', custom_objects={'RandomWeightedAverage':RandomWeightedAverage})
 encoder = load_model('encoder.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
