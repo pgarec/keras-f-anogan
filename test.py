@@ -100,6 +100,8 @@ if __name__ == '__main__':
         print(a)
         n = make_noise(1)
         g = generator.predict(n)
+        axes.append(fig.add_subplot(rows, cols, a + 1))
+        plt.axis('off')
         plt.imshow(g.squeeze())
 
     fig.savefig('collage.png')
