@@ -104,7 +104,7 @@ class Trainer:
             plt.savefig(os.path.join(self.plot_path, 'epoch_{}-image_{}.png'.format(epoch, m)), bbox_inches='tight')
             m += 1
 
-    def train(self, num_epochs=50, batch_size=64):
+    def train(self, num_epochs=30, batch_size=64):
         batches_per_epoch = np.shape(self.x_train)[0]//batch_size
         stats = {'wasserstein_distance': [], 'generator_loss': []}
 
