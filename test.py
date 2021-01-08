@@ -101,8 +101,6 @@ if __name__ == '__main__':
         n = make_noise(1)
         g = generator.predict(n)
         axes.append(fig.add_subplot(rows, cols, a + 1))
-        subplot_title = ("Subplot" + str(a))
-        axes[-1].set_title(subplot_title)
         plt.imshow(g.squeeze())
 
     fig.savefig('collage.png')
