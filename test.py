@@ -97,13 +97,13 @@ if __name__ == '__main__':
     fig = plt.figure()
 
     for a in range(rows * cols):
-        b = np.random.randint(7, size=(height, width))
+        print(a)
         n = make_noise(1)
         g = generator.predict(n)
         axes.append(fig.add_subplot(rows, cols, a + 1))
         subplot_title = ("Subplot" + str(a))
         axes[-1].set_title(subplot_title)
-        plt.imshow(g)
+        plt.imshow(g.squeeze())
 
     fig.savefig('collage.png')
 
