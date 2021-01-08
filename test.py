@@ -6,6 +6,7 @@ import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
 from keras.layers.merge import _Merge
+import matplotlib.pyplot as plt
 
 
 class RandomWeightedAverage(_Merge):
@@ -88,8 +89,25 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
+    width = 4
+    height = 4
+    rows = 8
+    cols = 8
+    axes = []
+    fig = plt.figure()
 
-    for i in range(15):
+    for a in range(rows * cols):
+        b = np.random.randint(7, size=(height, width))
+        n = make_noise(1)
+        g = generator.predict(n)
+        axes.append(fig.add_subplot(rows, cols, a + 1))
+        subplot_title = ("Subplot" + str(a))
+        axes[-1].set_title(subplot_title)
+        plt.imshow(g)
+
+    fig.savefig('collage.png')
+
+    '''for i in range(15):
         print(i)
         n = make_noise(1)
         im = get_batch(1)
@@ -103,7 +121,12 @@ if __name__ == '__main__':
         plt.savefig('resultats_encoding/image_reconstruced' + str(i) + '.png')
 
         plt.imshow(im3, cmap='gray')
-        plt.savefig('proves-wgangp/generated' + str(i) + '.png')
+        plt.savefig('proves-wgangp/generated' + str(i) + '.png')'''
+
+
+
+
+
 
 
 
