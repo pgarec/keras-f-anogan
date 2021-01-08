@@ -44,8 +44,6 @@ z_size=(1, 1, 100)
 z_size2=100
 
 discriminator = load_model('disc.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
-#disc_gp = load_model('disc-gp.h5')
-gen_gp = load_model('gen-gp.h5', custom_objects={'RandomWeightedAverage':RandomWeightedAverage})
 encoder = load_model('encoder.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
@@ -84,7 +82,7 @@ def get_batch(batch_size):
 
 
 def make_noise(batch_size):
-    noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + tuple([z_size2])))
+    noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + z_size))
     return noise
 
 
@@ -94,15 +92,15 @@ if __name__ == '__main__':
     for i in range(15):
         print(i)
         n = make_noise(1)
-        #im = get_batch(1)
-        #im2 = encodergen.predict(im)
-        im3 = gen_gp.predict(n)
+        im = get_batch(1)
+        im2 = encodergen.predict(im)
+        im3 = generator.predict(n)
 
-        #plt.imshow(im.squeeze(), cmap='gray')
-        #plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
+        plt.imshow(im.squeeze(), cmap='gray')
+        plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
 
-        #plt.imshow(im2.squeeze(), cmap='gray')
-        #plt.savefig('resultats_encoding/image_reconstruced' + str(i) + '.png')
+        plt.imshow(im2.squeeze(), cmap='gray')
+        plt.savefig('resultats_encoding/image_reconstruced' + str(i) + '.png')
 
         plt.imshow(im3, cmap='gray')
         plt.savefig('proves-wgangp/generated' + str(i) + '.png')
