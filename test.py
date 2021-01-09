@@ -139,7 +139,7 @@ if __name__ == '__main__':
     plt.ylabel('Sample count')
     plt.xlabel('Critic score');
 
-    plt.save('histogram.png')
+    plt.savefig('histogram.png')
 
     '''width = 4
     height = 4
