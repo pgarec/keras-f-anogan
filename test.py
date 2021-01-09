@@ -130,6 +130,7 @@ if __name__ == '__main__':
     real = []
     fake = []
     for i in range(100):
+        print(i)
         real[r[i]] = discriminator.predict(r[i])
         fake[f[i]] = discriminator.predict(f[i])
 
