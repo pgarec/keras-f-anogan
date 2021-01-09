@@ -146,6 +146,7 @@ if __name__ == '__main__':
 
 
     for i in range(200):
+        print(fake[i].shape)
         fake_regen = encodergen.predict(fake[i])
         real_regen = encodergen.predict(real[i])
         loss_fake[i] = encoder_loss2(fake[i],fake_regen[i])
