@@ -152,9 +152,8 @@ if __name__ == '__main__':
 
     print(real)
     print(fake)
-
-    plt.hist(real, label='Normal samples')  # density=False would make counts
-    plt.hist(fake, label='Anomalous samples')  # density=False would make count#
+    plt.hist(real, color='b', label='Normal samples', bins=np.arange(0, 0.01, 0.001))  # density=False would make counts
+    plt.hist(fake, label='Anomalous samples', color='g', bins=np.arange(0, 0.01, 0.001))  # density=False would make count#
     plt.legend()
     plt.title("Histogram of Critic's scores")
     plt.ylabel('Sample count')
