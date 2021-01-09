@@ -135,29 +135,27 @@ if __name__ == '__main__':
     fig = plt.figure()
 
     for a in range(rows):
-        for b in range(cols):
-            print(a*rows+b)
 
-            r = get_batch_0(1)
-            f = get_batch(1)
-            r1 = encodergen.predict(r)
-            f1 = encodergen.predict(f)
+        r = get_batch_0(1)
+        f = get_batch(1)
+        r1 = encodergen.predict(r)
+        f1 = encodergen.predict(f)
 
-            axes.append(fig.add_subplot(rows, cols, a*rows+b + 1))
-            plt.axis('off')
-            plt.imshow(r.squeeze())
+        axes.append(fig.add_subplot(rows, cols, a*rows+ 1))
+        plt.axis('off')
+        plt.imshow(r.squeeze())
 
-            axes.append(fig.add_subplot(rows, cols, a * rows + b + 2))
-            plt.axis('off')
-            plt.imshow(r1.squeeze())
+        axes.append(fig.add_subplot(rows, cols, a * rows + 2))
+        plt.axis('off')
+        plt.imshow(r1.squeeze())
 
-            axes.append(fig.add_subplot(rows, cols, a * rows + b + 3))
-            plt.axis('off')
-            plt.imshow(f.squeeze())
+        axes.append(fig.add_subplot(rows, cols, a * rows + 3))
+        plt.axis('off')
+        plt.imshow(f.squeeze())
 
-            axes.append(fig.add_subplot(rows, cols, a * rows + b + 4))
-            plt.axis('off')
-            plt.imshow(f1.squeeze())
+        axes.append(fig.add_subplot(rows, cols, a * rows + 4))
+        plt.axis('off')
+        plt.imshow(f1.squeeze())
 
     fig.savefig('collage.png')
 
