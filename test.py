@@ -40,7 +40,7 @@ def encoder_loss2(y_true,y_pred):
 
     l1 = K.mean(K.square(y_pred - y_true))
     l2 = K.mean(K.square(intermediate_layer_model.predict(y_pred) - intermediate_layer_model.predict(y_true)))
-    return l1 + l2
+    return l1 + l2.astype(np.float32)
 
 
 def custom_activation(x):
