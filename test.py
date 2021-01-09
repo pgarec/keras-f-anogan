@@ -149,8 +149,10 @@ if __name__ == '__main__':
                                            outputs=discriminator.get_layer("feature_extractor").output)
 
     print(intermediate_layer_model.predict(np.expand_dims(fake[0],axis=0)))
+    print("out")
 
     for i in range(200):
+        print(i)
         loss_fake.append(encoder_loss2(fake[i],fake_regen[i]))
         loss_real.append(encoder_loss2(real[i], real_regen[i]))
 
