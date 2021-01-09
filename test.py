@@ -127,12 +127,13 @@ if __name__ == '__main__':
     r = get_batch_0(100)
     f = get_batch(100)
 
-    real = []
-    fake = []
-    for i in range(100):
+    real = discriminator.predict_on_batch(r)
+    fake = discriminator.predict_on_batch(f)
+
+    '''for i in range(100):
         print(i)
         real[r[i]] = discriminator.predict(r[i])
-        fake[f[i]] = discriminator.predict(f[i])
+        fake[f[i]] = discriminator.predict(f[i])'''
 
     print(real)
     print(fake)
