@@ -130,15 +130,16 @@ if __name__ == '__main__':
     real = discriminator.predict_on_batch(r)
     fake = discriminator.predict_on_batch(f)
 
-    '''for i in range(100):
-        print(i)
-        real[r[i]] = discriminator.predict(r[i])
-        fake[f[i]] = discriminator.predict(f[i])'''
-
     print(real)
     print(fake)
-    fig = plt.figure()
 
+    plt.hist(real, density=True, bins=30)  # density=False would make counts
+    plt.hist(fake, density=True, bins=30)  # density=False would make count# s
+    plt.title("Histogram of Critic's scores")
+    plt.ylabel('Sample count')
+    plt.xlabel('Critic score');
+
+    plt.save('histogram.png')
 
     '''width = 4
     height = 4
