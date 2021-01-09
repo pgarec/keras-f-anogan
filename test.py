@@ -39,8 +39,9 @@ def encoder_loss2(y_true,y_pred):
                                            outputs=discriminator.get_layer("feature_extractor").output)
 
     l1 = np.mean(np.square(y_pred - y_true))
-    l2 = np.mean(np.square(intermediate_layer_model.predict(np.expand_dims(y_pred, axis=0))
-                           - intermediate_layer_model.predict(np.expand_dims(y_true, axis=0))))
+    #l2 = np.mean(np.square(intermediate_layer_model.predict(np.expand_dims(y_pred, axis=0))
+    #                       - intermediate_layer_model.predict(np.expand_dims(y_true, axis=0))))
+    l2 = np.mean(np.square(discriminator.predict(np.expand_dims(y_pred,axis=0) - discriminator.predict(np.expand_dims(y_true,axis=0) )))
     return l1 + l2
 
 
