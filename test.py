@@ -151,6 +151,7 @@ if __name__ == '__main__':
         loss_fake[i] = encoder_loss2(fake[i],fake_regen[i])
         loss_real[i] = encoder_loss2(real[i], real_regen[i])'''
 
+    print(loss_fake)
     print(np.mean(loss_fake))
     print(np.mrean(loss_real))
 
