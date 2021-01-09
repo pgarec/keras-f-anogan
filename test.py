@@ -414,16 +414,16 @@ def random_noise(batch_size):
 
 if __name__ == '__main__':
 
-    real0 = get_batch_0(400)
-    real1 = get_batch_1(400)
-    real2 = get_batch_2(400)
-    real3 = get_batch_3(400)
-    real4 = get_batch_4(400)
-    real5 = get_batch_5(400)
-    real6 = get_batch_6(400)
-    real7 = get_batch_7(400)
-    real8 = get_batch_8(400)
-    real9 = get_batch_9(400)
+    real0 = get_batch_0(200)
+    real1 = get_batch_1(200)
+    real2 = get_batch_2(200)
+    real3 = get_batch_3(200)
+    real4 = get_batch_4(200)
+    real5 = get_batch_5(200)
+    real6 = get_batch_6(200)
+    real7 = get_batch_7(200)
+    real8 = get_batch_8(200)
+    real9 = get_batch_9(200)
 
     real_regen0 = encodergen.predict_on_batch(real0)
     real_regen1 = encodergen.predict_on_batch(real1)
@@ -447,7 +447,7 @@ if __name__ == '__main__':
     loss_real8 = []
     loss_real9 = []
 
-    for i in range(400):
+    for i in range(200):
         print(i)
         loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
         loss_real1.append(encoder_loss2(real1[i], real_regen1[i]))
