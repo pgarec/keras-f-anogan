@@ -38,8 +38,8 @@ def encoder_loss2(y_true,y_pred):
     intermediate_layer_model = keras.Model(inputs=discriminator.input,
                                            outputs=discriminator.get_layer("feature_extractor").output)
 
-    l1 = K.mean(K.square(y_pred - y_true))
-    #l2 = K.mean(K.square(intermediate_layer_model.predict(y_pred) - intermediate_layer_model.predict(y_true)))
+    l1 = np.mean(K.square(y_pred - y_true))
+    #l2 = np.mean(K.square(intermediate_layer_model.predict(y_pred) - intermediate_layer_model.predict(y_true)))
     return l1
 
 
