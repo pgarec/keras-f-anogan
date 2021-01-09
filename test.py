@@ -50,7 +50,7 @@ generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein
 encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
 
 
-def dataset_0(self):
+def dataset_0():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
     """
