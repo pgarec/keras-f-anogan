@@ -147,7 +147,8 @@ if __name__ == '__main__':
     f = get_batch(100)
 
     real = discriminator.predict_on_batch(r)
-    fake = discriminator.predict_on_batch(encodergen.predict_on_batch(f))
+    #fake = discriminator.predict_on_batch(encodergen.predict_on_batch(f))
+    fake = discriminator.predict_on_batch(f)
 
     print(real)
     print(fake)
