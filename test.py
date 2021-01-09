@@ -34,6 +34,14 @@ def encoder_loss():
 
     return loss
 
+def encoder_loss2(y_true,y_pred):
+    intermediate_layer_model = keras.Model(inputs=discriminator.input,
+                                           outputs=discriminator.get_layer("feature_extractor").output)
+
+    l1 = K.mean(K.square(y_pred - y_true))
+    l2 = K.mean(K.square(intermediate_layer_model(y_pred) - intermediate_layer_model(y_true)))
+    return l1 + l2
+
 
 def custom_activation(x):
     return K.tanh(x)/2
@@ -127,100 +135,21 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
-    width = 4
-    height = 4
-    rows = 8
-    cols = 4
-    axes = []
-    fig = plt.figure()
+    fake = get_batch(200)
+    real = get_batch_0(200)
 
-    for a in range(rows):
+    fake_regen = encodergen.predict_on_batch(fake)
+    real_regen = encodergen.predict_on_batch(real)
 
-        print(a)
-        if (a == 0):
-            r = get_batch_0(1)
-            f = get_batch(1)
-            r1 = encodergen.predict(r)
-            f1 = encodergen.predict(f)
+    loss_real = []
+    loss_fake = []
 
-            axes.append(fig.add_subplot(rows, cols, a*cols+ 1))
-            plt.axis('off')
-            plt.set_title('Normal image')
-            plt.imshow(r.squeeze())
+    for i in range(200):
+        loss_fake[i] = encoder_loss2(fake[i],fake_regen[i])
+        loss_real[i] = encoder_loss2(real[i], real_regen[i])
 
-            axes.append(fig.add_subplot(rows, cols, a * cols + 2))
-            plt.axis('off')
-            plt.set_title('Reconstructed image')
-            plt.imshow(r1.squeeze())
-
-            axes.append(fig.add_subplot(rows, cols, a * cols + 3))
-            plt.axis('off')
-            plt.set_title('Anomalous image')
-            plt.imshow(f.squeeze())
-
-            axes.append(fig.add_subplot(rows, cols, a * cols + 4))
-            plt.axis('off')
-            plt.set_title('Reconstructed image')
-            plt.imshow(f1.squeeze())
-        else:
-            r = get_batch_0(1)
-            f = get_batch(1)
-            r1 = encodergen.predict(r)
-            f1 = encodergen.predict(f)
-
-            axes.append(fig.add_subplot(rows, cols, a * cols + 1))
-            plt.axis('off')
-            plt.imshow(r.squeeze())
-
-            axes.append(fig.add_subplot(rows, cols, a * cols + 2))
-            plt.axis('off')
-            plt.imshow(r1.squeeze())
-
-            axes.append(fig.add_subplot(rows, cols, a * cols + 3))
-            plt.axis('off')
-            plt.imshow(f.squeeze())
-
-            axes.append(fig.add_subplot(rows, cols, a * cols + 4))
-            plt.axis('off')
-            plt.imshow(f1.squeeze())
-
-    fig.savefig('collage.png')
-
-    '''r = get_batch_0(100)
-    f = get_batch(100)
-
-    real = discriminator.predict_on_batch(r)
-    #fake = discriminator.predict_on_batch(encodergen.predict_on_batch(f))
-    fake = discriminator.predict_on_batch(f)
-
-    print(real)
-    print(fake)
-    #plt.hist(real, color='b', label='Normal samples', bins=10, histtype='step')  # density=False would make counts
-    plt.hist(real, color='red', label='Normal samples', bins=10, histtype='bar')  # density=False would make counts
-    plt.hist(fake, color='tan', label='Anomalous samples', bins=10, histtype='bar')  # density=False would make counts
-
-    plt.legend(prop={'size': 10})
-    plt.title("Histogram of Critic scores")
-    plt.ylabel('Sample count')
-    plt.xlabel('Critic score');
-
-    plt.savefig('histogram.png')
-
-    for i in range(15):
-        print(i)
-        n = make_noise(1)
-        im = get_batch(1)
-        im2 = encodergen.predict(im)
-        im3 = generator.predict(n)
-
-        plt.imshow(im.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_real'+str(i)+'.png')
-
-        plt.imshow(im2.squeeze(), cmap='gray')
-        plt.savefig('resultats_encoding/image_reconstruced' + str(i) + '.png')
-
-        plt.imshow(im3, cmap='gray')
-        plt.savefig('proves-wgangp/generated' + str(i) + '.png')'''
+    print(np.mean(loss_fake))
+    print(np.mrean(loss_real))
 
 
 
