@@ -7,6 +7,8 @@ from PIL import Image
 import matplotlib.pyplot as plt
 from keras.layers.merge import _Merge
 import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle
+
 
 
 class RandomWeightedAverage(_Merge):
@@ -150,8 +152,9 @@ if __name__ == '__main__':
     print(real)
     print(fake)
 
-    plt.hist(real, density=True, bins=30)  # density=False would make counts
-    plt.hist(fake, density=True, bins=30)  # density=False would make count# s
+    plt.hist(real, density=True, bins=30, label='Normal samples')  # density=False would make counts
+    plt.hist(fake, density=True, bins=30, label='Anomalous samples')  # density=False would make count#
+    plt.legend()
     plt.title("Histogram of Critic's scores")
     plt.ylabel('Sample count')
     plt.xlabel('Critic score');
