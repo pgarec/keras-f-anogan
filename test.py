@@ -136,6 +136,8 @@ if __name__ == '__main__':
 
     for a in range(rows-1):
 
+        print(a)
+
         r = get_batch_0(1)
         f = get_batch(1)
         r1 = encodergen.predict(r)
