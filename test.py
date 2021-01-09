@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from keras.layers.merge import _Merge
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
+import math
 
 
 
@@ -149,11 +150,11 @@ if __name__ == '__main__':
     real = discriminator.predict_on_batch(r)
     #fake = discriminator.predict_on_batch(encodergen.predict_on_batch(f))
     fake = discriminator.predict_on_batch(f)
-
+    w = 3
     print(real)
     print(fake)
-    plt.hist(real, color='b', label='Normal samples', bins=np.arange(0, 0.01, 0.001))  # density=False would make counts
-    plt.hist(fake, label='Anomalous samples', color='g', bins=np.arange(0, 0.01, 0.001))  # density=False would make count#
+    plt.hist(real, color='b', label='Normal samples', bins=math.ceil((real.max() - real.min()) / w))  # density=False would make counts
+    plt.hist(fake, label='Anomalous samples', color='g', bins=math.ceil((real.max() - real.min()) / w))  # density=False would make count#
     plt.legend()
     plt.title("Histogram of Critic's scores")
     plt.ylabel('Sample count')
