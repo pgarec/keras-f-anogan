@@ -88,8 +88,6 @@ def dataset_0():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_1():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
@@ -452,15 +450,15 @@ if __name__ == '__main__':
     for i in range(400):
         print(i)
         loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real1.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real2.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real3.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real4.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real5.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real6.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real7.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real8.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real9.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real1.append(encoder_loss2(real1[i], real_regen1[i]))
+        loss_real2.append(encoder_loss2(real2[i], real_regen2[i]))
+        loss_real3.append(encoder_loss2(real3[i], real_regen3[i]))
+        loss_real4.append(encoder_loss2(real4[i], real_regen4[i]))
+        loss_real5.append(encoder_loss2(real5[i], real_regen5[i]))
+        loss_real6.append(encoder_loss2(real6[i], real_regen6[i]))
+        loss_real7.append(encoder_loss2(real7[i], real_regen7[i]))
+        loss_real8.append(encoder_loss2(real8[i], real_regen8[i]))
+        loss_real9.append(encoder_loss2(real9[i], real_regen9[i]))
 
     data_plot = [loss_real0, loss_real1, loss_real2, loss_real3, loss_real4, loss_real5, loss_real6, loss_real7, loss_real8, loss_real9]
     fig = plt.figure(1, figsize=(9, 6))
