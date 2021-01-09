@@ -143,19 +143,19 @@ if __name__ == '__main__':
         r1 = encodergen.predict(r)
         f1 = encodergen.predict(f)
 
-        axes.append(fig.add_subplot(rows, cols, a*rows+ 1))
+        axes.append(fig.add_subplot(rows, cols, a*cols+ 1))
         plt.axis('off')
         plt.imshow(r.squeeze())
 
-        axes.append(fig.add_subplot(rows, cols, a * rows + 2))
+        axes.append(fig.add_subplot(rows, cols, a * cols + 2))
         plt.axis('off')
         plt.imshow(r1.squeeze())
 
-        axes.append(fig.add_subplot(rows, cols, a * rows + 3))
+        axes.append(fig.add_subplot(rows, cols, a * cols + 3))
         plt.axis('off')
         plt.imshow(f.squeeze())
 
-        axes.append(fig.add_subplot(rows, cols, a * rows + 4))
+        axes.append(fig.add_subplot(rows, cols, a * cols + 4))
         plt.axis('off')
         plt.imshow(f1.squeeze())
 
