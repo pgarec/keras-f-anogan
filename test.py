@@ -152,7 +152,11 @@ if __name__ == '__main__':
     print(np.mean(loss_fake))
     print(np.mean(loss_real))
 
-
+    data_plot = [loss_real, loss_fake]
+    fig = plt.figure(1, figsize=(9, 6))
+    ax = fig.add_subplot(111)
+    bp = ax.boxplot(data_plot)
+    fig.savefig('boxplot.png', bbox_inches='tight')
 
 
 
