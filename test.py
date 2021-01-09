@@ -145,6 +145,8 @@ if __name__ == '__main__':
     loss_fake = []
 
     for i in range(200):
+        print(fake.shape)
+        print(fake_regen.shape)
         print(fake[i].shape)
         print(fake_regen[i].shape)
         loss_fake[i] = encoder_loss2(fake[i],fake_regen[i])
