@@ -151,19 +151,12 @@ if __name__ == '__main__':
     #fake = discriminator.predict_on_batch(encodergen.predict_on_batch(f))
     fake = discriminator.predict_on_batch(f)
 
-    print(real.shape)
-    print(fake.shape)
-    all = []
-    for i in range(100):
-        all[i] = real[i],fake[i]
-
-    w = 6
     print(real)
     print(fake)
-    print(all)
     #plt.hist(real, color='b', label='Normal samples', bins=10, histtype='step')  # density=False would make counts
-    plt.hist(all, color=['red','lime'], label=['Normal samples','Anomalous samples'],
-             bins=10, histtype='bar')  # density=False would make count#
+    plt.hist(real, color='red', label='Normal samples', bins=10, histtype='bar')  # density=False would make counts
+    plt.hist(fake, color='lime', label='Anomalous samples', bins=10, histtype='bar')  # density=False would make counts
+
     plt.legend(prop={'size': 10})
     plt.title("Histogram of Critic's scores")
     plt.ylabel('Sample count')
