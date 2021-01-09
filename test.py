@@ -145,13 +145,10 @@ if __name__ == '__main__':
     loss_fake = []
 
     for i in range(200):
-        print(fake.shape)
-        print(fake_regen.shape)
-        print(real.shape)
-        print(real_regen.shape)
+        print(i)
 
-        loss_fake[i] = encoder_loss2(fake[i],fake_regen[i])
-        loss_real[i] = encoder_loss2(real[i], real_regen[i])
+        #loss_fake[i] = encoder_loss2(fake[i],fake_regen[i])
+        #loss_real[i] = encoder_loss2(real[i], real_regen[i])
 
     print(loss_fake)
     print(np.mean(loss_fake))
