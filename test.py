@@ -124,28 +124,11 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
-    width = 4
-    height = 4
-    rows = 8
-    cols = 8
-    axes = []
-    fig = plt.figure()
-
-    for a in range(rows * cols):
-        print(a)
-        n = make_noise(1)
-        g = generator.predict(n)
-        axes.append(fig.add_subplot(rows, cols, a + 1))
-        plt.axis('off')
-        plt.imshow(g.squeeze())
-
-    fig.savefig('collage.png')
-
     r = get_batch_0(100)
     f = get_batch(100)
 
     real = discriminator.predict_on_batch(r)
-    fake = discriminator.predict_on_batch(f)
+    fake = encodergen.predict_on_batch(f)
 
     print(real)
     print(fake)
