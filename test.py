@@ -158,7 +158,7 @@ if __name__ == '__main__':
     plt.hist(fake, color='tan', label='Anomalous samples', bins=10, histtype='bar')  # density=False would make counts
 
     plt.legend(prop={'size': 10})
-    plt.title("Histogram of Critic's scores")
+    plt.title("Histogram of Critic scores")
     plt.ylabel('Sample count')
     plt.xlabel('Critic score');
 
