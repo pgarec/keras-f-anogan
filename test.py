@@ -145,6 +145,11 @@ if __name__ == '__main__':
     loss_real = []
     loss_fake = []
 
+    intermediate_layer_model = keras.Model(inputs=discriminator.input,
+                                           outputs=discriminator.get_layer("feature_extractor").output)
+
+    print(intermediate_layer_model.predict(fake[0]))
+
     for i in range(200):
         loss_fake.append(encoder_loss2(fake[i],fake_regen[i]))
         loss_real.append(encoder_loss2(real[i], real_regen[i]))
