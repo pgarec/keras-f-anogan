@@ -134,36 +134,40 @@ def make_noise(batch_size):
     return noise
 
 
+def random_noise(batch_size):
+    noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + (32,32,1)))
+    return noise
+
+
 if __name__ == '__main__':
 
     fake = get_batch(200)
     real = get_batch_0(200)
+    noise = random_noise(200)
 
     fake_regen = encodergen.predict_on_batch(fake)
     real_regen = encodergen.predict_on_batch(real)
+    noise_regen = encodergen.predict_on_batch(noise)
 
     loss_real = []
     loss_fake = []
-
-    intermediate_layer_model = keras.Model(inputs=discriminator.input,
-                                           outputs=discriminator.get_layer("feature_extractor").output)
-
-    print(intermediate_layer_model.predict(np.expand_dims(fake[0],axis=0)))
-    print("out")
+    random_noise = []
 
     for i in range(200):
         print(i)
         loss_fake.append(encoder_loss2(fake[i],fake_regen[i]))
         loss_real.append(encoder_loss2(real[i], real_regen[i]))
+        random_noise.append(encoder_loss2(noise[i], noise_regen[i]))
 
     print(loss_fake)
     print(np.mean(loss_fake))
     print(np.mean(loss_real))
 
-    data_plot = [loss_real, loss_fake]
+    data_plot = [loss_real, loss_fake, random_noise]
     fig = plt.figure(1, figsize=(9, 6))
     ax = fig.add_subplot(111)
     bp = ax.boxplot(data_plot)
+    ax.set_xticklabels(['Normal samples', 'Anomalous samples', 'Random noise'])
     fig.savefig('boxplot.png', bbox_inches='tight')
 
 
