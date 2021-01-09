@@ -134,30 +134,55 @@ if __name__ == '__main__':
     axes = []
     fig = plt.figure()
 
-    for a in range(rows-1):
+    for a in range(rows):
 
         print(a)
+        if (a == 0):
+            r = get_batch_0(1)
+            f = get_batch(1)
+            r1 = encodergen.predict(r)
+            f1 = encodergen.predict(f)
 
-        r = get_batch_0(1)
-        f = get_batch(1)
-        r1 = encodergen.predict(r)
-        f1 = encodergen.predict(f)
+            axes.append(fig.add_subplot(rows, cols, a*cols+ 1))
+            plt.axis('off')
+            plt.set_title('Normal image')
+            plt.imshow(r.squeeze())
 
-        axes.append(fig.add_subplot(rows, cols, a*cols+ 1))
-        plt.axis('off')
-        plt.imshow(r.squeeze())
+            axes.append(fig.add_subplot(rows, cols, a * cols + 2))
+            plt.axis('off')
+            plt.set_title('Reconstructed image')
+            plt.imshow(r1.squeeze())
 
-        axes.append(fig.add_subplot(rows, cols, a * cols + 2))
-        plt.axis('off')
-        plt.imshow(r1.squeeze())
+            axes.append(fig.add_subplot(rows, cols, a * cols + 3))
+            plt.axis('off')
+            plt.set_title('Anomalous image')
+            plt.imshow(f.squeeze())
 
-        axes.append(fig.add_subplot(rows, cols, a * cols + 3))
-        plt.axis('off')
-        plt.imshow(f.squeeze())
+            axes.append(fig.add_subplot(rows, cols, a * cols + 4))
+            plt.axis('off')
+            plt.set_title('Reconstructed image')
+            plt.imshow(f1.squeeze())
+        else:
+            r = get_batch_0(1)
+            f = get_batch(1)
+            r1 = encodergen.predict(r)
+            f1 = encodergen.predict(f)
 
-        axes.append(fig.add_subplot(rows, cols, a * cols + 4))
-        plt.axis('off')
-        plt.imshow(f1.squeeze())
+            axes.append(fig.add_subplot(rows, cols, a * cols + 1))
+            plt.axis('off')
+            plt.imshow(r.squeeze())
+
+            axes.append(fig.add_subplot(rows, cols, a * cols + 2))
+            plt.axis('off')
+            plt.imshow(r1.squeeze())
+
+            axes.append(fig.add_subplot(rows, cols, a * cols + 3))
+            plt.axis('off')
+            plt.imshow(f.squeeze())
+
+            axes.append(fig.add_subplot(rows, cols, a * cols + 4))
+            plt.axis('off')
+            plt.imshow(f1.squeeze())
 
     fig.savefig('collage.png')
 
