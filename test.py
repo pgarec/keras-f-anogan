@@ -49,13 +49,45 @@ encoder = load_model('encoder.h5', custom_objects={'loss':encoder_loss(), 'custo
 generator = load_model('gen.h5', custom_objects={'wasserstein_loss': wasserstein_loss})
 encodergen = load_model('encodergen.h5', custom_objects={'loss':encoder_loss(), 'custom_activation':custom_activation})
 
+
+def dataset_0(self):
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 0))
+    test_filter = np.where((y_test == 0))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
 def dataset():
 
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
     """
 
-    (x_train, _), (x_test, _) = mnist.load_data()
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train != 0))
+    test_filter = np.where((y_test != 0))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
 
     x_train = np.reshape(x_train, (-1, 28, 28, 1))
     train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
@@ -75,12 +107,15 @@ def dataset():
 
 
 x_tr, x_te = dataset()
-
+x0_tr, x0_te = dataset_0()
 
 def get_batch(batch_size):
     idx = np.random.choice(np.shape(x_te)[0], batch_size, replace=False)
     return x_te[idx]
 
+def get_batch_0(batch_size):
+    idx = np.random.choice(np.shape(x0_te)[0], batch_size, replace=False)
+    return x0_te[idx]
 
 def make_noise(batch_size):
     noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + z_size))
@@ -89,7 +124,21 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
-    width = 4
+    r = get_batch_0(100)
+    f = get_batch(100)
+
+    real = []
+    fake = []
+    for i in range(100):
+        real[r[i]] = discriminator.predict(r[i])
+        fake[f[i]] = discriminator.predict(f[i])
+
+    print(real)
+    print(fake)
+    fig = plt.figure()
+
+
+    '''width = 4
     height = 4
     rows = 8
     cols = 8
@@ -104,7 +153,7 @@ if __name__ == '__main__':
         plt.axis('off')
         plt.imshow(g.squeeze())
 
-    fig.savefig('collage.png')
+    fig.savefig('collage.png')'''
 
     '''for i in range(15):
         print(i)
