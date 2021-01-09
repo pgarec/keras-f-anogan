@@ -116,8 +116,6 @@ def dataset_1():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_2():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
@@ -144,8 +142,6 @@ def dataset_2():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_3():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
@@ -172,8 +168,6 @@ def dataset_3():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_4():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
@@ -200,8 +194,6 @@ def dataset_4():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_5():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
@@ -228,8 +220,6 @@ def dataset_5():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_6():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
@@ -256,8 +246,6 @@ def dataset_6():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_7():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
@@ -284,16 +272,14 @@ def dataset_7():
     test_padded -= 1
 
     return train_padded, test_padded
-
-
 def dataset_8():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
     """
 
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
-    train_filter = np.where((y_train == 0))
-    test_filter = np.where((y_test == 0))
+    train_filter = np.where((y_train == 8))
+    test_filter = np.where((y_test == 8))
     (x_train, y_train) = x_train[train_filter], y_train[train_filter]
     (x_test, y_test) = x_test[test_filter], y_test[test_filter]
 
@@ -312,9 +298,6 @@ def dataset_8():
     test_padded -= 1
 
     return train_padded, test_padded
-        loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
-
-
 def dataset_9():
     """
     Load dataset, convert to 32x32, constrain input to [-1, 1].
