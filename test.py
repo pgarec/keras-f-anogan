@@ -39,10 +39,8 @@ def encoder_loss2(y_true,y_pred):
                                            outputs=discriminator.get_layer("feature_extractor").output)
 
     l1 = np.mean(np.square(y_pred - y_true))
-    #l2 = np.mean(np.square(intermediate_layer_model.predict(np.expand_dims(y_pred, axis=0))
-    #                       - intermediate_layer_model.predict(np.expand_dims(y_true, axis=0))))
-    l2 = np.mean(np.square(discriminator.predict(np.expand_dims(y_pred,axis=0)) -
-                           discriminator.predict(np.expand_dims(y_true,axis=0))))
+    l2 = np.mean(np.square(intermediate_layer_model.predict(np.expand_dims(y_pred, axis=0))
+                           - intermediate_layer_model.predict(np.expand_dims(y_true, axis=0))))
     return l1 + l2
 
 
@@ -91,6 +89,261 @@ def dataset_0():
 
     return train_padded, test_padded
 
+
+def dataset_1():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 1))
+    test_filter = np.where((y_test == 1))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+def dataset_2():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 2))
+    test_filter = np.where((y_test == 2))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+def dataset_3():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 3))
+    test_filter = np.where((y_test == 3))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+def dataset_4():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 4))
+    test_filter = np.where((y_test == 4))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+def dataset_5():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 5))
+    test_filter = np.where((y_test == 5))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+def dataset_6():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 6))
+    test_filter = np.where((y_test == 6))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+def dataset_7():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 7))
+    test_filter = np.where((y_test == 7))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+def dataset_8():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 0))
+    test_filter = np.where((y_test == 0))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+        loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
+
+
+def dataset_9():
+    """
+    Load dataset, convert to 32x32, constrain input to [-1, 1].
+    """
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    train_filter = np.where((y_train == 9))
+    test_filter = np.where((y_test == 9))
+    (x_train, y_train) = x_train[train_filter], y_train[train_filter]
+    (x_test, y_test) = x_test[test_filter], y_test[test_filter]
+
+    x_train = np.reshape(x_train, (-1, 28, 28, 1))
+    train_padded = np.zeros((np.shape(x_train)[0], 32, 32, 1))
+    train_padded[:, 2:30, 2:30, :] = x_train
+    train_padded /= np.max(train_padded)
+    train_padded *= 2
+    train_padded -= 1
+
+    x_test = np.reshape(x_test, (-1, 28, 28, 1))
+    test_padded = np.zeros((np.shape(x_test)[0], 32, 32, 1))
+    test_padded[:, 2:30, 2:30, :] = x_test
+    test_padded /= np.max(test_padded)
+    test_padded *= 2
+    test_padded -= 1
+
+    return train_padded, test_padded
+
+
+
 def dataset():
 
     """
@@ -122,6 +375,15 @@ def dataset():
 
 x_tr, x_te = dataset()
 x0_tr, x0_te = dataset_0()
+x1_tr, x1_te = dataset_1()
+x2_tr, x2_te = dataset_2()
+x3_tr, x3_te = dataset_3()
+x4_tr, x4_te = dataset_4()
+x5_tr, x5_te = dataset_5()
+x6_tr, x6_te = dataset_6()
+x7_tr, x7_te = dataset_7()
+x8_tr, x8_te = dataset_8()
+x9_tr, x9_te = dataset_9()
 
 def get_batch(batch_size):
     idx = np.random.choice(np.shape(x_te)[0], batch_size, replace=False)
@@ -130,6 +392,34 @@ def get_batch(batch_size):
 def get_batch_0(batch_size):
     idx = np.random.choice(np.shape(x0_te)[0], batch_size, replace=False)
     return x0_te[idx]
+
+def get_batch_1(batch_size):
+    idx = np.random.choice(np.shape(x1_te)[0], batch_size, replace=False)
+    return x1_te[idx]
+def get_batch_2(batch_size):
+    idx = np.random.choice(np.shape(x2_te)[0], batch_size, replace=False)
+    return x2_te[idx]
+def get_batch_3(batch_size):
+    idx = np.random.choice(np.shape(x3_te)[0], batch_size, replace=False)
+    return x3_te[idx]
+def get_batch_4(batch_size):
+    idx = np.random.choice(np.shape(x4_te)[0], batch_size, replace=False)
+    return x4_te[idx]
+def get_batch_5(batch_size):
+    idx = np.random.choice(np.shape(x5_te)[0], batch_size, replace=False)
+    return x5_te[idx]
+def get_batch_6(batch_size):
+    idx = np.random.choice(np.shape(x6_te)[0], batch_size, replace=False)
+    return x6_te[idx]
+def get_batch_7(batch_size):
+    idx = np.random.choice(np.shape(x7_te)[0], batch_size, replace=False)
+    return x7_te[idx]
+def get_batch_8(batch_size):
+    idx = np.random.choice(np.shape(x8_te)[0], batch_size, replace=False)
+    return x8_te[idx]
+def get_batch_9(batch_size):
+    idx = np.random.choice(np.shape(x9_te)[0], batch_size, replace=False)
+    return x9_te[idx]
 
 def make_noise(batch_size):
     noise = np.random.normal(scale=0.5, size=(tuple([batch_size]) + z_size))
@@ -143,33 +433,57 @@ def random_noise(batch_size):
 
 if __name__ == '__main__':
 
-    fake = get_batch(200)
-    real = get_batch_0(200)
-    noise = random_noise(200)
+    real0 = get_batch_0(400)
+    real1 = get_batch_1(400)
+    real2 = get_batch_2(400)
+    real3 = get_batch_3(400)
+    real4 = get_batch_4(400)
+    real5 = get_batch_5(400)
+    real6 = get_batch_6(400)
+    real7 = get_batch_7(400)
+    real8 = get_batch_8(400)
+    real9 = get_batch_9(400)
 
-    fake_regen = encodergen.predict_on_batch(fake)
-    real_regen = encodergen.predict_on_batch(real)
-    noise_regen = encodergen.predict_on_batch(noise)
+    real_regen0 = encodergen.predict_on_batch(real0)
+    real_regen1 = encodergen.predict_on_batch(real1)
+    real_regen2 = encodergen.predict_on_batch(real2)
+    real_regen3 = encodergen.predict_on_batch(real3)
+    real_regen4 = encodergen.predict_on_batch(real4)
+    real_regen5 = encodergen.predict_on_batch(real5)
+    real_regen6 = encodergen.predict_on_batch(real6)
+    real_regen7 = encodergen.predict_on_batch(real7)
+    real_regen8 = encodergen.predict_on_batch(real8)
+    real_regen9 = encodergen.predict_on_batch(real9)
 
-    loss_real = []
-    loss_fake = []
-    random_noise = []
+    loss_real0 = []
+    loss_real1 = []
+    loss_real2 = []
+    loss_real3 = []
+    loss_real4 = []
+    loss_real5 = []
+    loss_real6 = []
+    loss_real7 = []
+    loss_real8 = []
+    loss_real9 = []
 
-    for i in range(200):
+    for i in range(400):
         print(i)
-        loss_fake.append(encoder_loss2(fake[i],fake_regen[i]))
-        loss_real.append(encoder_loss2(real[i], real_regen[i]))
-        random_noise.append(encoder_loss2(noise[i], noise_regen[i]))
+        loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real1.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real2.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real3.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real4.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real5.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real6.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real7.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real8.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real9.append(encoder_loss2(real0[i], real_regen0[i]))
 
-    print(loss_fake)
-    print(np.mean(loss_fake))
-    print(np.mean(loss_real))
-
-    data_plot = [loss_real, loss_fake, random_noise]
+    data_plot = [loss_real0, loss_real1, loss_real2, loss_real3, loss_real4, loss_real5, loss_real6, loss_real7, loss_real8, loss_real9]
     fig = plt.figure(1, figsize=(9, 6))
     ax = fig.add_subplot(111)
     bp = ax.boxplot(data_plot)
-    ax.set_xticklabels(['Normal samples', 'Anomalous samples', 'Random noise'])
+    ax.set_xticklabels(['0', '1',  '2', '3', '4', '5', '6', '7', '8', '9'])
     fig.savefig('boxplot.png', bbox_inches='tight')
 
 
