@@ -127,24 +127,41 @@ def make_noise(batch_size):
 
 if __name__ == '__main__':
 
-    '''width = 4
+    width = 4
     height = 4
     rows = 8
-    cols = 8
+    cols = 4
     axes = []
     fig = plt.figure()
 
-    for a in range(rows * cols):
-        print(a)
-        n = make_noise(1)
-        g = generator.predict(n)
-        axes.append(fig.add_subplot(rows, cols, a + 1))
-        plt.axis('off')
-        plt.imshow(g.squeeze())
+    for a in range(rows):
+        for b in range(cols):
+            print(a*rows+b)
 
-    fig.savefig('collage.png')'''
+            r = get_batch_0(1)
+            f = get_batch(1)
+            r1 = encodergen.predict(r)
+            f1 = encodergen.predict(f)
 
-    r = get_batch_0(100)
+            axes.append(fig.add_subplot(rows, cols, a*rows+b + 1))
+            plt.axis('off')
+            plt.imshow(r.squeeze())
+
+            axes.append(fig.add_subplot(rows, cols, a * rows + b + 2))
+            plt.axis('off')
+            plt.imshow(r1.squeeze())
+
+            axes.append(fig.add_subplot(rows, cols, a * rows + b + 3))
+            plt.axis('off')
+            plt.imshow(f.squeeze())
+
+            axes.append(fig.add_subplot(rows, cols, a * rows + b + 4))
+            plt.axis('off')
+            plt.imshow(f1.squeeze())
+
+    fig.savefig('collage.png')
+
+    '''r = get_batch_0(100)
     f = get_batch(100)
 
     real = discriminator.predict_on_batch(r)
@@ -164,7 +181,7 @@ if __name__ == '__main__':
 
     plt.savefig('histogram.png')
 
-    '''for i in range(15):
+    for i in range(15):
         print(i)
         n = make_noise(1)
         im = get_batch(1)
