@@ -134,7 +134,7 @@ if __name__ == '__main__':
     axes = []
     fig = plt.figure()
 
-    for a in range(rows):
+    for a in range(rows-1):
 
         r = get_batch_0(1)
         f = get_batch(1)
