@@ -138,18 +138,18 @@ if __name__ == '__main__':
     fake = get_batch(200)
     real = get_batch_0(200)
 
-    fake_regen = encodergen.predict_on_batch(fake)
-    real_regen = encodergen.predict_on_batch(real)
+    #fake_regen = encodergen.predict_on_batch(fake)
+    #real_regen = encodergen.predict_on_batch(real)
 
     loss_real = []
     loss_fake = []
 
-    loss_fake = encoder_loss2(fake,fake_regen)
-    loss_real = encoder_loss2(real,real_regen)
 
-    '''for i in range(200):
+    for i in range(200):
+        fake_regen = encodergen.predict(fake[i])
+        real_regen = encodergen.predict(real[i])
         loss_fake[i] = encoder_loss2(fake[i],fake_regen[i])
-        loss_real[i] = encoder_loss2(real[i], real_regen[i])'''
+        loss_real[i] = encoder_loss2(real[i], real_regen[i])
 
     print(loss_fake)
     print(np.mean(loss_fake))
