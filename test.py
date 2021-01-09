@@ -150,7 +150,7 @@ if __name__ == '__main__':
     real = discriminator.predict_on_batch(r)
     #fake = discriminator.predict_on_batch(encodergen.predict_on_batch(f))
     fake = discriminator.predict_on_batch(f)
-    w = 3
+    w = 1
     print(real)
     print(fake)
     plt.hist(real, color='b', label='Normal samples', bins=math.ceil((real.max() - real.min()) / w))  # density=False would make counts
