@@ -155,7 +155,7 @@ if __name__ == '__main__':
     print(fake)
     #plt.hist(real, color='b', label='Normal samples', bins=10, histtype='step')  # density=False would make counts
     plt.hist(real, color='red', label='Normal samples', bins=10, histtype='bar')  # density=False would make counts
-    plt.hist(fake, color='lime', label='Anomalous samples', bins=10, histtype='bar')  # density=False would make counts
+    plt.hist(fake, color='tan', label='Anomalous samples', bins=10, histtype='bar')  # density=False would make counts
 
     plt.legend(prop={'size': 10})
     plt.title("Histogram of Critic's scores")
