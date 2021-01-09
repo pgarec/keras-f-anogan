@@ -39,8 +39,8 @@ def encoder_loss2(y_true,y_pred):
                                            outputs=discriminator.get_layer("feature_extractor").output)
 
     l1 = np.mean(np.square(y_pred - y_true))
-    #l2 = np.mean(K.square(intermediate_layer_model.predict(y_pred) - intermediate_layer_model.predict(y_true)))
-    return l1
+    l2 = np.mean(K.square(intermediate_layer_model.predict(y_pred) - intermediate_layer_model.predict(y_true)))
+    return l1 + l2
 
 
 def custom_activation(x):
