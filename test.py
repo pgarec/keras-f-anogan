@@ -151,6 +151,8 @@ if __name__ == '__main__':
     #fake = discriminator.predict_on_batch(encodergen.predict_on_batch(f))
     fake = discriminator.predict_on_batch(f)
 
+    print(real.shape)
+    print(fake.shape)
     all = []
     for i in range(100):
         all[i] = real[i],fake[i]
