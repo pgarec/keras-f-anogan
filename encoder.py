@@ -15,8 +15,8 @@ def custom_activation(x):
 
 
 class Encoder:
-    def __init__(self, image_shape=(32, 32, 1), n_filters=64, z_size=(1, 1, 100),
-                 alpha=0.2, lr=7.5e-5):
+    def __init__(self, image_shape=(32, 32, 1), n_filters=32, z_size=(1, 1, 100),
+                 alpha=0.2, lr=5e-5):
 
         assert image_shape[0] % 8 == 0, "Image shape must be divisible by 8."
 
