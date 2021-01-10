@@ -417,11 +417,13 @@ if __name__ == '__main__':
     r = get_batch_0(100)
     f = get_batch(100)
 
-    real = encodergen.predict_on_batch(r)
-    fake = encodergen.predict_on_batch(f)
+    l1 = []
+    l2 = []
 
-    l1 = encoder_loss2(r,real)
-    l2 = encoder_loss2(f,fake)
+    for i in range(100):
+
+        l1.append(encoder_loss2(r[i],encodergen.predict_on_batch(r[i])))
+        l2.append(encoder_loss2(f[i],encodergen.predict_on_batch(f[i])))
 
     plt.hist(l1, label='Normal samples')  # density=False would make counts
     plt.hist(l2, label='Anomalous samples')  # density=False would make count#
