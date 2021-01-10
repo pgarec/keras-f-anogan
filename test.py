@@ -9,7 +9,7 @@ from keras.layers.merge import _Merge
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import math
-
+import statistics as st
 
 
 class RandomWeightedAverage(_Merge):
@@ -414,58 +414,41 @@ def random_noise(batch_size):
 
 if __name__ == '__main__':
 
-    real0 = get_batch_0(200)
-    real1 = get_batch_1(200)
-    real2 = get_batch_2(200)
-    real3 = get_batch_3(200)
-    real4 = get_batch_4(200)
-    real5 = get_batch_5(200)
-    real6 = get_batch_6(200)
-    real7 = get_batch_7(200)
-    real8 = get_batch_8(200)
-    real9 = get_batch_9(200)
+    real = get_batch_0(400)
+    fake = get_batch(400)
+    noise = random_noise(400)
 
-    real_regen0 = encodergen.predict_on_batch(real0)
-    real_regen1 = encodergen.predict_on_batch(real1)
-    real_regen2 = encodergen.predict_on_batch(real2)
-    real_regen3 = encodergen.predict_on_batch(real3)
-    real_regen4 = encodergen.predict_on_batch(real4)
-    real_regen5 = encodergen.predict_on_batch(real5)
-    real_regen6 = encodergen.predict_on_batch(real6)
-    real_regen7 = encodergen.predict_on_batch(real7)
-    real_regen8 = encodergen.predict_on_batch(real8)
-    real_regen9 = encodergen.predict_on_batch(real9)
+    real_regen = encodergen.predict_on_batch(real)
+    fake_regen = encodergen.predict_on_batch(fake)
+    noise_regen = encodergen.predict_on_batch(noise)
 
-    loss_real0 = []
-    loss_real1 = []
-    loss_real2 = []
-    loss_real3 = []
-    loss_real4 = []
-    loss_real5 = []
-    loss_real6 = []
-    loss_real7 = []
-    loss_real8 = []
-    loss_real9 = []
+    loss_real = []
+    loss_fake = []
+    loss_noise = []
 
-    for i in range(200):
+    for i in range(400):
         print(i)
-        loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real1.append(encoder_loss2(real1[i], real_regen1[i]))
-        loss_real2.append(encoder_loss2(real2[i], real_regen2[i]))
-        loss_real3.append(encoder_loss2(real3[i], real_regen3[i]))
-        loss_real4.append(encoder_loss2(real4[i], real_regen4[i]))
-        loss_real5.append(encoder_loss2(real5[i], real_regen5[i]))
-        loss_real6.append(encoder_loss2(real6[i], real_regen6[i]))
-        loss_real7.append(encoder_loss2(real7[i], real_regen7[i]))
-        loss_real8.append(encoder_loss2(real8[i], real_regen8[i]))
-        loss_real9.append(encoder_loss2(real9[i], real_regen9[i]))
+        loss_real.append(encoder_loss2(real[i], real_regen[i]))
+        loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
+        loss_noise.append(encoder_loss2(noise[i], noise_regen[i]))
 
-    data_plot = [loss_real0, loss_real1, loss_real2, loss_real3, loss_real4, loss_real5, loss_real6, loss_real7, loss_real8, loss_real9]
-    fig = plt.figure(1, figsize=(9, 6))
-    ax = fig.add_subplot(111)
-    bp = ax.boxplot(data_plot)
-    ax.set_xticklabels(['0', '1',  '2', '3', '4', '5', '6', '7', '8', '9'])
-    fig.savefig('boxplot.png', bbox_inches='tight')
+    results_real = [min(loss_real), max(loss_real), st.mean(loss_real), st.median(loss_real),
+                        [round(q, 1) for q in st.quantiles(loss_real, n=4)]]
+
+    results_fake = [min(loss_fake), max(loss_fake), st.mean(loss_fake), st.median(loss_fake),
+    [round(q, 1) for q in st.quantiles(loss_fake, n=4)]]
+
+    results_noise = [min(loss_noise), max(loss_noise), st.mean(loss_noise), st.median(loss_noise),
+    [round(q, 1) for q in st.quantiles(loss_noise, n=4)]]
+
+    with open('results.txt', 'w') as f:
+        for item in results_real:
+            f.write("%s\n" % item)
+        for item in results_noise:
+            f.write("%s\n" % item)
+        for item in results_fake:
+            f.write("%s\n" % item)
+
 
 
 
