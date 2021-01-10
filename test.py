@@ -424,8 +424,8 @@ if __name__ == '__main__':
     plt.legend(prop={'size': 10})
     plt.title("Histogram of Critic scores")
     plt.ylabel('Sample count')
-    plt.xlabel('Critic score');
-    plt.savefig('histogram.png')>
+    plt.xlabel('Critic score')
+    plt.savefig('histogram.png')
 
 
 
