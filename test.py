@@ -413,9 +413,9 @@ def random_noise(batch_size):
 
 
 if __name__ == '__main__':
-    fake = get_batch(200)
-    real = get_batch_0(200)
-    noise = random_noise(200)
+    fake = get_batch(100)
+    real = get_batch_0(100)
+    noise = random_noise(100)
 
     fake_regen = encodergen.predict_on_batch(fake)
     real_regen = encodergen.predict_on_batch(real)
@@ -425,7 +425,7 @@ if __name__ == '__main__':
     loss_fake = []
     random_noise = []
 
-    for i in range(200):
+    for i in range(100):
         print(i)
         loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
         loss_real.append(encoder_loss2(real[i], real_regen[i]))
