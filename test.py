@@ -421,7 +421,7 @@ if __name__ == '__main__':
     l2 = []
 
     for i in range(100):
-
+        print(i)
         l1.append(encoder_loss2(r[i],encodergen.predict_on_batch(r[i])))
         l2.append(encoder_loss2(f[i],encodergen.predict_on_batch(f[i])))
 
