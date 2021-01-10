@@ -432,14 +432,9 @@ if __name__ == '__main__':
         loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
         loss_noise.append(encoder_loss2(noise[i], noise_regen[i]))
 
-    results_real = [min(loss_real), max(loss_real), st.mean(loss_real), st.median(loss_real),
-                        [round(q, 1) for q in st.quantiles(loss_real, n=4)]]
-
-    results_fake = [min(loss_fake), max(loss_fake), st.mean(loss_fake), st.median(loss_fake),
-    [round(q, 1) for q in st.quantiles(loss_fake, n=4)]]
-
-    results_noise = [min(loss_noise), max(loss_noise), st.mean(loss_noise), st.median(loss_noise),
-    [round(q, 1) for q in st.quantiles(loss_noise, n=4)]]
+    results_real = [min(loss_real), max(loss_real), st.mean(loss_real), st.median(loss_real)]
+    results_fake = [min(loss_fake), max(loss_fake), st.mean(loss_fake), st.median(loss_fake)]
+    results_noise = [min(loss_noise), max(loss_noise), st.mean(loss_noise), st.median(loss_noise)]
 
     with open('results.txt', 'w') as f:
         for item in results_real:
