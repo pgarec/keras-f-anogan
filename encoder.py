@@ -42,16 +42,7 @@ class Encoder:
         model.add(BatchNormalization())
 
         model.add(Conv2D(filters=2 * self.n_filters,
-                         kernel_size=(3, 3),
-                         strides=2,
-                         padding='same',
-                         use_bias=False,
-                         kernel_initializer=self.weight_init))
-        model.add(LeakyReLU(self.alpha))
-        model.add(BatchNormalization())
-
-        model.add(Conv2D(filters=2 * self.n_filters,
-                         kernel_size=(3, 3),
+                         kernel_size=(4, 4),
                          strides=2,
                          padding='same',
                          use_bias=False,
