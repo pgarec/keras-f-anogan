@@ -422,8 +422,8 @@ if __name__ == '__main__':
 
     for i in range(100):
         print(i)
-        l1.append(encoder_loss2(r[i],encodergen.predict_on_batch(r[i])))
-        l2.append(encoder_loss2(f[i],encodergen.predict_on_batch(f[i])))
+        l1.append(encoder_loss2(np.expand_dims(r[i]),np.expand_dims(encodergen.predict_on_batch(r[i]))))
+        l2.append(encoder_loss2(np.expand_dims(f[i]),np.expand_dims(encodergen.predict_on_batch(f[i]))))
 
     plt.hist(l1, label='Normal samples')  # density=False would make counts
     plt.hist(l2, label='Anomalous samples')  # density=False would make count#
