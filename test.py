@@ -445,11 +445,11 @@ if __name__ == '__main__':
 
 
     axes.append(fig.add_subplot(rows, cols, 0*rows + 1))
-    plt.imshow(real0)
+    plt.imshow(real0.squeeze())
     axes.append(fig.add_subplot(rows, cols, 0 * rows + 2))
-    plt.imshow(real_regen0)
+    plt.imshow(real_regen0.squeeze())
     axes.append(fig.add_subplot(rows, cols, 0 * rows + 3))
-    plt.imshow(real0-real_regen0)
+    plt.imshow(real0.squeeze()-real_regen0.squeeze())
 
     axes.append(fig.add_subplot(rows, cols, 1 * rows + 1))
     plt.imshow(fake1)
