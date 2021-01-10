@@ -413,35 +413,24 @@ def random_noise(batch_size):
 
 
 if __name__ == '__main__':
-    fake = get_batch(100)
-    real = get_batch_0(100)
-    noise = random_noise(100)
 
-    fake_regen = encodergen.predict_on_batch(fake)
-    real_regen = encodergen.predict_on_batch(real)
-    noise_regen = encodergen.predict_on_batch(noise)
+    r = get_batch_0(100)
+    f = get_batch(100)
 
-    loss_real = []
-    loss_fake = []
-    random_noise = []
+    l1 = []
+    l2 = []
 
     for i in range(100):
         print(i)
-        loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
-        loss_real.append(encoder_loss2(real[i], real_regen[i]))
-        random_noise.append(encoder_loss2(noise[i], noise_regen[i]))
+        l1.append(encoder_loss2(np.expand_dims(r[i],axis=0),np.expand_dims(encodergen.predict(r[i]),axis=0)))
+        l2.append(encoder_loss2(np.expand_dims(f[i], axis=0),np.expand_dims(encodergen.predict(f[i]),axis=0)))
 
-    print(loss_fake)
-    print(np.mean(loss_fake))
-    print(np.mean(loss_real))
+    plt.hist(l1, label='Normal samples')  # density=False would make counts
+    plt.hist(l2, label='Anomalous samples')  # density=False would make count#
+    plt.ylabel('Sample count')
+    plt.xlabel('Critic score');
 
-    data_plot = [loss_real, loss_fake, random_noise]
-    fig = plt.figure(1, figsize=(9, 6))
-    ax = fig.add_subplot(111)
-    bp = ax.boxplot(data_plot)
-    ax.set_xticklabels(['Normal samples', 'Anomalous samples', 'Random noise'])
-    fig.savefig('boxplot.png', bbox_inches='tight')
-
+    plt.savefig('histogram.png')
 
 
 
