@@ -32,7 +32,7 @@ class Encoder:
     def encoder(self):
         model = Sequential()
         model.add(Conv2D(filters=self.n_filters,
-                    kernel_size=(4, 4),
+                    kernel_size=(3, 3),
                     strides=2,
                     padding='same',
                     use_bias=False,
@@ -60,7 +60,7 @@ class Encoder:
         model.add(BatchNormalization())
 
         model.add(Conv2D(filters=4*self.n_filters,
-                    kernel_size=(4, 4),
+                    kernel_size=(3, 3),
                     strides=2,
                     padding='same',
                     use_bias=False,
