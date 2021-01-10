@@ -536,18 +536,12 @@ if __name__ == '__main__':
 
     axes.append(fig.add_subplot(rows, cols, 9 * cols + 1))
     plt.axis('off')
-    subplot_title = ("Digit")
-    axes[-1].set_title(subplot_title)
     plt.imshow(fake9.squeeze())
     axes.append(fig.add_subplot(rows, cols, 9 * cols + 2))
     plt.axis('off')
-    subplot_title = ("Reconstruction")
-    axes[-1].set_title(subplot_title)
     plt.imshow(fake_regen9.squeeze())
     axes.append(fig.add_subplot(rows, cols, 9 * cols + 3))
     plt.axis('off')
-    subplot_title = ("Difference")
-    axes[-1].set_title(subplot_title)
     plt.imshow(fake9.squeeze() - fake_regen9.squeeze())
 
     fig.savefig('recons.png')
