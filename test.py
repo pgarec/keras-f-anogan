@@ -417,13 +417,14 @@ if __name__ == '__main__':
     r = get_batch_0(100)
     f = get_batch(100)
 
-    real = discriminator.predict_on_batch(r)
-    fake = discriminator.predict_on_batch(f)
+    real = encodergen.predict_on_batch(r)
+    fake = encodergen.predict_on_batch(f)
 
-    plt.bar(real, label='Normal samples')  # density=False would make counts
-    plt.bar(fake, label='Anomalous samples')  # density=False would make count#
-    plt.legend()
-    plt.title("Histogram of Critic's scores")
+    l1 = encoder_loss2(r,real)
+    l2 = encoder_loss2(f,fake)
+
+    plt.hist(l1, label='Normal samples')  # density=False would make counts
+    plt.hist(l2, label='Anomalous samples')  # density=False would make count#
     plt.ylabel('Sample count')
     plt.xlabel('Critic score');
 
