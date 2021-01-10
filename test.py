@@ -444,7 +444,7 @@ if __name__ == '__main__':
     fig = plt.figure()
 
 
-    axes.append(fig.add_subplot(real0, cols, 0*rows + 1))
+    axes.append(fig.add_subplot(rows, cols, 0*rows + 1))
     plt.imshow(real0)
     axes.append(fig.add_subplot(rows, cols, 0 * rows + 2))
     plt.imshow(real_regen0)
