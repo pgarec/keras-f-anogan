@@ -43,7 +43,7 @@ class Encoder:
 
         model.add(Conv2D(filters=2 * self.n_filters,
                          kernel_size=(3,3),
-                         strides=1,
+                         strides=2,
                          padding='same',
                          use_bias=False,
                          kernel_initializer=self.weight_init))
@@ -52,7 +52,7 @@ class Encoder:
 
         model.add(Conv2D(filters=2 * self.n_filters,
                          kernel_size=(3, 3),
-                         strides=1,
+                         strides=2,
                          padding='same',
                          use_bias=False,
                          kernel_initializer=self.weight_init))
