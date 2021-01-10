@@ -413,24 +413,19 @@ def random_noise(batch_size):
 
 
 if __name__ == '__main__':
-
     r = get_batch_0(100)
     f = get_batch(100)
 
-    l1 = []
-    l2 = []
+    real = discriminator.predict_on_batch(r)
+    fake = discriminator.predict_on_batch(f)
 
-    for i in range(100):
-        print(i)
-        l1.append(encoder_loss2(np.expand_dims(r[i],axis=0),np.expand_dims(encodergen.predict(r[i]),axis=0)))
-        l2.append(encoder_loss2(np.expand_dims(f[i], axis=0),np.expand_dims(encodergen.predict(f[i]),axis=0)))
-
-    plt.hist(l1, label='Normal samples')  # density=False would make counts
-    plt.hist(l2, label='Anomalous samples')  # density=False would make count#
+    plt.hist(real, color='red', label='Normal samples', bins=10, histtype='bar')  # density=False would make counts
+    plt.hist(fake, color='tan', label='Anomalous samples', bins=10, histtype='bar')  # density=False would make counts
+    plt.legend(prop={'size': 10})
+    plt.title("Histogram of Critic scores")
     plt.ylabel('Sample count')
     plt.xlabel('Critic score');
-
-    plt.savefig('histogram.png')
+    plt.savefig('histogram.png')>
 
 
 
