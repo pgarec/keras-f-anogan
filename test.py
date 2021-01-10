@@ -414,10 +414,20 @@ def random_noise(batch_size):
 
 if __name__ == '__main__':
 
+    r = get_batch_0(100)
+    f = get_batch(100)
 
+    real = discriminator.predict_on_batch(r)
+    fake = discriminator.predict_on_batch(f)
 
-    fig.savefig('recons.png')
+    plt.bar(real, label='Normal samples')  # density=False would make counts
+    plt.bar(fake, label='Anomalous samples')  # density=False would make count#
+    plt.legend()
+    plt.title("Histogram of Critic's scores")
+    plt.ylabel('Sample count')
+    plt.xlabel('Critic score');
 
+    plt.savefig('histogram.png')
 
 
 
