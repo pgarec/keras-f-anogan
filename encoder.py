@@ -16,7 +16,7 @@ def custom_activation(x):
 
 class Encoder:
     def __init__(self, image_shape=(32, 32, 1), n_filters=64, z_size=(1, 1, 100),
-                 alpha=0.2, lr=0.00035):
+                 alpha=0.2, lr=0.0007):
 
         assert image_shape[0] % 8 == 0, "Image shape must be divisible by 8."
         #lr=3.5e-5):
@@ -38,6 +38,15 @@ class Encoder:
                     use_bias=False,
                     input_shape=self.image_shape,
                     kernel_initializer=self.weight_init))
+        model.add(LeakyReLU(self.alpha))
+        model.add(BatchNormalization())
+
+        model.add(Conv2D(filters=2 * self.n_filters,
+                         kernel_size=(3, 3),
+                         strides=2,
+                         padding='same',
+                         use_bias=False,
+                         kernel_initializer=self.weight_init))
         model.add(LeakyReLU(self.alpha))
         model.add(BatchNormalization())
 
