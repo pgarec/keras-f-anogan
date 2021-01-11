@@ -431,15 +431,16 @@ if __name__ == '__main__':
     l = [x for x in loss_fake if x > 1.89519e-05]
     l2 = [x for x in loss_real if x < 1.89519e-05]
 
+    print(st.mean(loss_fake))
+    print(st.mean(loss_real))
+
     tp = len(l2)
     tn = len(l)
-    fp = 400 - tp
-    fn = 400 - tn
 
     print(tp)
     print(tn)
-    print(fp)
-    print(fn)
+
+
 
 
 
