@@ -424,8 +424,9 @@ if __name__ == '__main__':
         loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
 
     l = [x for x in loss_fake if x > 2.36134]
-    l2 = [x for x in loss_fake if x <= 2.36134]
 
+    print(loss_fake)
+    print(len(l))
     accuracy = (len(l) / 400) * 100
     print(accuracy)
 
