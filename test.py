@@ -423,7 +423,7 @@ if __name__ == '__main__':
         print(i)
         loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
 
-    l = [x for x in loss_fake if x > 2.36134]
+    l = [x for x in loss_fake if x > 0.000236134]
 
     print(loss_fake)
     print(len(l))
