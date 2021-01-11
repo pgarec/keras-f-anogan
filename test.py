@@ -416,24 +416,30 @@ if __name__ == '__main__':
 
     fake = get_batch(400)
     fake_regen = encodergen.predict_on_batch(fake)
+    real = get_batch_0(400)
+    real_regen = encodergen.predict_on_batch(real)
 
     loss_fake = []
+    loss_real = []
 
     for i in range(400):
         print(i)
         loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
+        loss_fake.append(encoder_loss2(real[i], real_regen[i]))
+
 
     l = [x for x in loss_fake if x > 1.89519e-05]
+    l2 = [x for x in loss_real if x < 1.89519e-05]
 
-    print(loss_fake)
-    print(len(l))
-    accuracy = (len(l) / 400) * 100
-    print(accuracy)
+    tp = len(l2)
+    tn = len(l)
+    fp = 400 - tp
+    fn = 400 - tn
 
-
-
-
-
+    print(tp)
+    print(tn)
+    print(fp)
+    print(fn)
 
 
 
