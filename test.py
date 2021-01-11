@@ -425,7 +425,7 @@ if __name__ == '__main__':
     for i in range(400):
         print(i)
         loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
-        loss_fake.append(encoder_loss2(real[i], real_regen[i]))
+        loss_real.append(encoder_loss2(real[i], real_regen[i]))
 
 
     l = [x for x in loss_fake if x > 1.89519e-05]
