@@ -414,35 +414,23 @@ def random_noise(batch_size):
 
 if __name__ == '__main__':
 
-    real = get_batch_0(400)
     fake = get_batch(400)
-    noise = random_noise(400)
-
-    real_regen = encodergen.predict_on_batch(real)
     fake_regen = encodergen.predict_on_batch(fake)
-    noise_regen = encodergen.predict_on_batch(noise)
 
-    loss_real = []
     loss_fake = []
-    loss_noise = []
 
     for i in range(400):
         print(i)
-        loss_real.append(encoder_loss2(real[i], real_regen[i]))
         loss_fake.append(encoder_loss2(fake[i], fake_regen[i]))
-        loss_noise.append(encoder_loss2(noise[i], noise_regen[i]))
 
-    results_real = [min(loss_real), max(loss_real), st.mean(loss_real), st.median(loss_real)]
-    results_fake = [min(loss_fake), max(loss_fake), st.mean(loss_fake), st.median(loss_fake)]
-    results_noise = [min(loss_noise), max(loss_noise), st.mean(loss_noise), st.median(loss_noise)]
+    l = [x for x in loss_fake if x > 2.36134]
+    l2 = [x for x in loss_fake if x <= 2.36134]
 
-    with open('results.txt', 'w') as f:
-        for item in results_real:
-            f.write("%s\n" % item)
-        for item in results_noise:
-            f.write("%s\n" % item)
-        for item in results_fake:
-            f.write("%s\n" % item)
+    accuracy = (len(l) / 400) * 100
+    print(accuracy)
+
+
+
 
 
 
