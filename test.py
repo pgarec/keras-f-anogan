@@ -413,115 +413,59 @@ def random_noise(batch_size):
 
 
 if __name__ == '__main__':
-    real0 = get_batch_0(1)
-    fake1 = get_batch_1(1)
-    fake2 = get_batch_2(1)
-    fake3 = get_batch_3(1)
-    fake4 = get_batch_4(1)
-    fake5 = get_batch_5(1)
-    fake6 = get_batch_6(1)
-    fake7 = get_batch_7(1)
-    fake8 = get_batch_8(1)
-    fake9 = get_batch_9(1)
+    real0 = get_batch_0(400)
+    real1 = get_batch_1(400)
+    real2 = get_batch_2(400)
+    real3 = get_batch_3(400)
+    real4 = get_batch_4(400)
+    real5 = get_batch_5(400)
+    real6 = get_batch_6(400)
+    real7 = get_batch_7(400)
+    real8 = get_batch_8(400)
+    real9 = get_batch_9(400)
 
     real_regen0 = encodergen.predict_on_batch(real0)
-    fake_regen1 = encodergen.predict_on_batch(fake1)
-    fake_regen2 = encodergen.predict_on_batch(fake2)
-    fake_regen3 = encodergen.predict_on_batch(fake3)
-    fake_regen4 = encodergen.predict_on_batch(fake4)
-    fake_regen5 = encodergen.predict_on_batch(fake5)
-    fake_regen6 = encodergen.predict_on_batch(fake6)
-    fake_regen7 = encodergen.predict_on_batch(fake7)
-    fake_regen8 = encodergen.predict_on_batch(fake8)
-    fake_regen9 = encodergen.predict_on_batch(fake9)
+    real_regen1 = encodergen.predict_on_batch(real1)
+    real_regen2 = encodergen.predict_on_batch(real2)
+    real_regen3 = encodergen.predict_on_batch(real3)
+    real_regen4 = encodergen.predict_on_batch(real4)
+    real_regen5 = encodergen.predict_on_batch(real5)
+    real_regen6 = encodergen.predict_on_batch(real6)
+    real_regen7 = encodergen.predict_on_batch(real7)
+    real_regen8 = encodergen.predict_on_batch(real8)
+    real_regen9 = encodergen.predict_on_batch(real9)
 
-    width = 5
-    height = 5
-    rows = 10
-    cols = 3
-    axes = []
-    fig = plt.figure()
+    loss_real0 = []
+    loss_real1 = []
+    loss_real2 = []
+    loss_real3 = []
+    loss_real4 = []
+    loss_real5 = []
+    loss_real6 = []
+    loss_real7 = []
+    loss_real8 = []
+    loss_real9 = []
 
-    axes.append(fig.add_subplot(real0, cols, 0 * rows + 1))
-    plt.imshow(real0)
-    axes.append(fig.add_subplot(rows, cols, 0 * rows + 2))
-    plt.imshow(real_regen0)
-    axes.append(fig.add_subplot(rows, cols, 0 * rows + 3))
-    plt.imshow(real0 - real_regen0)
+    for i in range(400):
+        print(i)
+        loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real1.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real2.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real3.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real4.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real5.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real6.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real7.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real8.append(encoder_loss2(real0[i], real_regen0[i]))
+        loss_real9.append(encoder_loss2(real0[i], real_regen0[i]))
 
-    axes.append(fig.add_subplot(rows, cols, 1 * rows + 1))
-    plt.imshow(fake1)
-    axes.append(fig.add_subplot(rows, cols, 1 * rows + 2))
-    plt.imshow(fake_regen1)
-    axes.append(fig.add_subplot(rows, cols, 1 * rows + 3))
-    plt.imshow(fake1 - fake_regen1)
-
-    axes.append(fig.add_subplot(rows, cols, 2 * rows + 1))
-    plt.imshow(fake2)
-    axes.append(fig.add_subplot(rows, cols, 2 * rows + 2))
-    plt.imshow(fake_regen2)
-    axes.append(fig.add_subplot(rows, cols, 2 * rows + 3))
-    plt.imshow(fake2 - fake_regen2)
-
-    axes.append(fig.add_subplot(rows, cols, 3 * rows + 1))
-    plt.imshow(fake3)
-    axes.append(fig.add_subplot(rows, cols, 3 * rows + 2))
-    plt.imshow(fake_regen3)
-    axes.append(fig.add_subplot(rows, cols, 3 * rows + 3))
-    plt.imshow(fake3 - fake_regen3)
-
-    axes.append(fig.add_subplot(rows, cols, 4 * rows + 1))
-    plt.imshow(fake4)
-    axes.append(fig.add_subplot(rows, cols, 4 * rows + 2))
-    plt.imshow(fake_regen4)
-    axes.append(fig.add_subplot(rows, cols, 4 * rows + 3))
-    plt.imshow(fake4 - fake_regen4)
-
-    axes.append(fig.add_subplot(rows, cols, 5 * rows + 1))
-    plt.imshow(fake5)
-    axes.append(fig.add_subplot(rows, cols, 5 * rows + 2))
-    plt.imshow(fake_regen5)
-    axes.append(fig.add_subplot(rows, cols, 5 * rows + 3))
-    plt.imshow(fake5 - fake_regen5)
-
-    axes.append(fig.add_subplot(rows, cols, 6 * rows + 1))
-    plt.imshow(fake6)
-    axes.append(fig.add_subplot(rows, cols, 6 * rows + 2))
-    plt.imshow(fake_regen6)
-    axes.append(fig.add_subplot(rows, cols, 6 * rows + 3))
-    plt.imshow(fake6 - fake_regen6)
-
-    axes.append(fig.add_subplot(rows, cols, 7 * rows + 1))
-    plt.imshow(fake7)
-    axes.append(fig.add_subplot(rows, cols, 7 * rows + 2))
-    plt.imshow(fake_regen7)
-    axes.append(fig.add_subplot(rows, cols, 7 * rows + 3))
-    plt.imshow(fake7 - fake_regen7)
-
-    axes.append(fig.add_subplot(rows, cols, 8 * rows + 1))
-    plt.imshow(fake8)
-    axes.append(fig.add_subplot(rows, cols, 8 * rows + 2))
-    plt.imshow(fake_regen8)
-    axes.append(fig.add_subplot(rows, cols, 8 * rows + 3))
-    plt.imshow(fake8 - fake_regen8)
-
-    axes.append(fig.add_subplot(rows, cols, 9 * rows + 1))
-    subplot_title = ("Digit")
-    axes[-1].set_title(subplot_title)
-    plt.imshow(fake9)
-    axes.append(fig.add_subplot(rows, cols, 9 * rows + 2))
-    subplot_title = ("Reconstruction")
-    axes[-1].set_title(subplot_title)
-    plt.imshow(fake_regen9)
-    axes.append(fig.add_subplot(rows, cols, 9 * rows + 3))
-    subplot_title = ("Difference")
-    axes[-1].set_title(subplot_title)
-    plt.imshow(fake9 - fake_regen9)
-
-    fig.savefig('recons.png')
-
-
-
+    data_plot = [loss_real0, loss_real1, loss_real2, loss_real3, loss_real4, loss_real5, loss_real6, loss_real7,
+                 loss_real8, loss_real9]
+    fig = plt.figure(1, figsize=(9, 6))
+    ax = fig.add_subplot(111)
+    bp = ax.boxplot(data_plot)
+    ax.set_xticklabels(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
+    fig.savefig('boxplot.png', bbox_inches='tight')
 
 
 
