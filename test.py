@@ -419,6 +419,7 @@ if __name__ == '__main__':
 
     results_real = discriminator.predict_on_batch(real)
     results_fake = discriminator.predict_on_batch(fake)
+    print(results_fake)
     data = [results_real, results_fake]
 
     fig = plt.figure()
