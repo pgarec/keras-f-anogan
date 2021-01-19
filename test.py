@@ -417,8 +417,8 @@ if __name__ == '__main__':
     real = get_batch_0(400)
     fake = get_batch(400)
 
-    results_real = list(np.flatten(np.array(discriminator.predict_on_batch(real))))
-    results_fake = list(np.flatten(np.array(discriminator.predict_on_batch(fake))))
+    results_real = list((np.array(discriminator.predict_on_batch(real))).flatten())
+    results_fake = list((np.array(discriminator.predict_on_batch(fake))).flatten())
     print(results_fake)
     data = [results_real, results_fake]
 
