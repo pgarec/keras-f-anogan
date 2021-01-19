@@ -413,59 +413,21 @@ def random_noise(batch_size):
 
 
 if __name__ == '__main__':
-    real0 = get_batch_0(400)
-    real1 = get_batch_1(400)
-    real2 = get_batch_2(400)
-    real3 = get_batch_3(400)
-    real4 = get_batch_4(400)
-    real5 = get_batch_5(400)
-    real6 = get_batch_6(400)
-    real7 = get_batch_7(400)
-    real8 = get_batch_8(400)
-    real9 = get_batch_9(400)
 
-    real_regen0 = encodergen.predict_on_batch(real0)
-    real_regen1 = encodergen.predict_on_batch(real1)
-    real_regen2 = encodergen.predict_on_batch(real2)
-    real_regen3 = encodergen.predict_on_batch(real3)
-    real_regen4 = encodergen.predict_on_batch(real4)
-    real_regen5 = encodergen.predict_on_batch(real5)
-    real_regen6 = encodergen.predict_on_batch(real6)
-    real_regen7 = encodergen.predict_on_batch(real7)
-    real_regen8 = encodergen.predict_on_batch(real8)
-    real_regen9 = encodergen.predict_on_batch(real9)
+    real = get_batch_0(400)
+    fake = get_batch(400)
 
-    loss_real0 = []
-    loss_real1 = []
-    loss_real2 = []
-    loss_real3 = []
-    loss_real4 = []
-    loss_real5 = []
-    loss_real6 = []
-    loss_real7 = []
-    loss_real8 = []
-    loss_real9 = []
+    results_real = discriminator.predict_on_batch(real)
+    results_fake = discriminator.predict_on_batch(fake)
+    data = [results_real, results_fake]
 
-    for i in range(400):
-        print(i)
-        loss_real0.append(encoder_loss2(real0[i], real_regen0[i]))
-        loss_real1.append(encoder_loss2(real1[i], real_regen1[i]))
-        loss_real2.append(encoder_loss2(real2[i], real_regen2[i]))
-        loss_real3.append(encoder_loss2(real3[i], real_regen3[i]))
-        loss_real4.append(encoder_loss2(real4[i], real_regen4[i]))
-        loss_real5.append(encoder_loss2(real5[i], real_regen5[i]))
-        loss_real6.append(encoder_loss2(real6[i], real_regen6[i]))
-        loss_real7.append(encoder_loss2(real7[i], real_regen7[i]))
-        loss_real8.append(encoder_loss2(real8[i], real_regen8[i]))
-        loss_real9.append(encoder_loss2(real9[i], real_regen9[i]))
-
-    data_plot = [loss_real0, loss_real1, loss_real2, loss_real3, loss_real4, loss_real5, loss_real6, loss_real7,
-                 loss_real8, loss_real9]
-    fig = plt.figure(1, figsize=(9, 6))
-    ax = fig.add_subplot(111)
-    bp = ax.boxplot(data_plot)
-    ax.set_xticklabels(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
-    fig.savefig('boxplot.png', bbox_inches='tight')
+    fig = plt.figure()
+    ax = fig.add_axes([0, 0, 1, 1])
+    X = np.arange(400)
+    bp = ax.boxplot(data)
+    ax.bar(X + 0.00, data[0], color='b', width=0.25)
+    ax.bar(X + 0.25, data[1], color='g', width=0.25)
+    fig.savefig('bars.png', bbox_inches='tight')
 
 
 
